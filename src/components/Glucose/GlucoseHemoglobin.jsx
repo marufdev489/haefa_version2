@@ -20,6 +20,11 @@ const GlucoseHemoglobin = () => {
   const [HrsFromLastEat, setHrsFromLastEat] = useState("");
   const [Hemoglobin, setHemoglobin] = useState("");
 
+  const token = localStorage.getItem('token');
+  const myTokenData = JSON.parse(token);
+  const tokenData = myTokenData?.user?.station;
+  const stations = tokenData.split(",");
+
   const handleSubmit = async (e, redirectUrl = "") => {
     e.preventDefault();
 
@@ -143,12 +148,16 @@ const GlucoseHemoglobin = () => {
               </div>
             </section>
             <section className="stationBtn">
-              <a
+              {
+                stations?.includes("station_4") && 
+                <a
                 className="border-0 button-color text-white py-2 px-3 text-capitalize rounded	button-bg"
                 onClick={(e) => handleSubmit(e, "/user-data")}
-              >
+               >
                 Save &amp; Station 4
-              </a>
+                </a> 
+              }
+
             </section>
             <div className="previewBtn">
                 <Link to="/prescription"

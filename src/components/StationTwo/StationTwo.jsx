@@ -26,8 +26,12 @@ const StationTwo = () => {
   const [CurrentTemparature, setCurrentTemparature] = useState("");
   const [RespiratoryRate, setRespiratoryRate] = useState("");
   const [SpO2Rate, setSpO2Rate] = useState("");
-  const [IndicatesNormalOxygenSaturation, setIndicatesNormalOxygenSaturation] =
-    useState("");
+  const [IndicatesNormalOxygenSaturation, setIndicatesNormalOxygenSaturation] = useState("");
+
+  const token = localStorage.getItem('token');
+  const myTokenData = JSON.parse(token);
+  const tokenData = myTokenData?.user?.station;
+  const stations = tokenData.split(",");
 
   const handleSubmit = async (e, redirectUrl = "") => {
     e.preventDefault();
@@ -270,11 +274,14 @@ const StationTwo = () => {
                 </div>
               </section>
               <section className="stationBtn">
-                <a
+                {
+                  stations?.includes("station_3") && 
+                  <a
                   className="border-0 button-color text-white py-2 px-3 text-capitalize rounded	button-bg"
                   onClick={(e) => handleSubmit(e, "/glucose-hemoglobin")}>
                   Save &amp; Station 3
                 </a>
+                }
               </section>
               <div className="previewBtn">
                 <Link to="/prescription"

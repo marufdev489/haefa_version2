@@ -26,6 +26,11 @@ const StationOneHeight = () => {
   const [OrgId] = useState("73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B");
   const [CreateUser] = useState("mmr");
 
+  const token = localStorage.getItem('token');
+  const myTokenData = JSON.parse(token);
+  const tokenData = myTokenData?.user?.station;
+  const stations = tokenData.split(",");
+
   const handleSubmit = async (e, redirectUrl) => {
     e.preventDefault();
 
@@ -286,12 +291,15 @@ const StationOneHeight = () => {
               </div>
             </section>
             <section className="stationBtn">
+              {
+                stations?.includes("station_2") && 
               <a
                 className="border-0 button-color text-white py-2 px-3 text-capitalize rounded	button-bg"
                 onClick={(e) => handleSubmit(e, "/blood-pressure-table")}
               >
                 Save &amp; Station 2
               </a>
+              }
             </section>
 
             <div className="previewBtn">
