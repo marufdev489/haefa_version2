@@ -34,7 +34,7 @@ const App = () => {
   
     return (
         <>
-            <BrowserRouter>   
+            <BrowserRouter>    
                 <Routes>
                     <Route exact path="/"  element={<Login/>}/>
                     <Route exact path="/dashboard"  element={<Protected Component={DashboardPage}/>}/>
