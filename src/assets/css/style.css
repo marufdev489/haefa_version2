@@ -468,7 +468,7 @@ div:where(.swal2-icon) {
     background-position-y: center;
     position: relative;
   }
-  .dateIcon::after{
+  /* .dateIcon::after{
     content: 'dd/mm/yyy';
     position: absolute;
     top: 50%;
@@ -477,7 +477,7 @@ div:where(.swal2-icon) {
   }
   .dateIcon:focus::after {
     display: none;
-  }
+  } */
 }
 
 

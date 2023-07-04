@@ -33,7 +33,7 @@ const StationCardiovascular = () => {
   const barcodePrefix = myTokenData?.user?.barcode_format.barcode_prefix;
   const randomNumber = Math.floor(100000 + Math.random() * 900000);
   const prescriptionUniqueId = `${barcodePrefix}${randomNumber}`
-  console.log(prescriptionUniqueId); 
+  console.log(prescriptionUniqueId);
 
   useEffect(() => {
     let result;
@@ -101,7 +101,6 @@ const StationCardiovascular = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     // Create a data object with the form input values
     const data = {
       PatientId: PatientId,
@@ -119,11 +118,9 @@ const StationCardiovascular = () => {
       CreateUser: "Mihal",
       OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       PrescriptionId: prescriptionUniqueId,
-      EmployeeId:"F53BFAE5-7678-4148-B47B-01721759FD99"
+      EmployeeId: "F53BFAE5-7678-4148-B47B-01721759FD99"
     };
-    axios
-      .post(`${API_URL}/api/cra-lab-create`, data)
-
+    axios.post(`${API_URL}/api/cra-lab-create`, data)
       .then((response) => {
         // Handle the response from the API if needed
         Swal.fire({
@@ -133,8 +130,7 @@ const StationCardiovascular = () => {
         }).then(function () {
           window.location = "final-prescription";
         });
-      })
-      .catch((error) => {
+      }).catch((error) => {
         // Handle any errors that occur during the API request
         console.error(error);
         Swal.fire({
@@ -144,6 +140,41 @@ const StationCardiovascular = () => {
         });
       });
   };
+
+  const handleSkip = (event) =>{
+    event.preventDefault();
+    // Create a data object with the form input values
+    const data = {
+      PatientId: PatientId,
+      Age: age,
+      Sex: sex,
+      BMI: BMI,
+      CigaretteSmoker: smoker,
+      SystolicBloodPressure: systolic,
+      OnBloodPressureMedication: bpMedication,
+      Diabetese: diabetes,
+      Result: cra,
+      TotalCholesterol: totalCholesterol,
+      HDLCholesterol: hdlCholesterol,
+      CRAType: "Lab",
+      CreateUser: "Mihal",
+      OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
+      PrescriptionId: prescriptionUniqueId,
+      EmployeeId: "F53BFAE5-7678-4148-B47B-01721759FD99"
+    };
+    axios.post(`${API_URL}/api/cra-lab-create`, data)
+      .then(() => {
+          window.location = "final-prescription";
+      }).catch((error) => {
+        // Handle any errors that occur during the API request
+        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An error occurred.",
+        });
+      });
+  }
 
   return (
     <>
@@ -357,12 +388,22 @@ const StationCardiovascular = () => {
                 save & next
               </Button>
 
-              <StationButton
+              {/* <StationButton
                 btnBg="button-bg"
                 btnOne="Skip"
                 type="submit"
                 link="/final-prescription"
-              />
+              /> */}
+
+              <div className="stationBtn">
+                <Button
+                  className="button-bg border-0 button-color text-white py-2 px-3 text-capitalize rounded"
+                  block="block"
+                  onClick={handleSkip}
+                >
+                  Skip
+                </Button>
+              </div>
 
               <div className="previewBtn">
                 <a
@@ -370,7 +411,7 @@ const StationCardiovascular = () => {
                 >
                   Histrory
                 </a>
-            </div>
+              </div>
             </div>
           </form>
         </div>
