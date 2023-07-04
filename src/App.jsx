@@ -56,9 +56,9 @@ const App = () => {
                     {/* station four */}
                     <Route exact path="/treatment-plan"  element={stations?.includes("patient_registration") && <Protected Component={TreatmentPlan}/>}/>
                     <Route exact path="/user-data" element={ <Protected Component={TPuserData}/>}/>
-                    <Route exact path="/station-fourb"  element={stations?.includes("station_2") && <Protected Component={PatientRegB}/>}/>
+                    <Route exact path="/station-fourb"  element={<Protected Component={PatientRegB}/>}/>
                     <Route exact path="/four-c-userinput"   element={ <Protected Component={FourAddInformation}/>}/>
-                    <Route exact path="/patient-list"  element={stations?.includes("station_4") && <Protected Component={PatientDataList}/>}/>
+                    <Route exact path="/patient-list"  element={<Protected Component={PatientDataList}/>}/>
                     <Route exact path="/counter" element={<Protected Component={Counter}/>}/>
                     <Route exact path="/settings" element={<Protected Component={Settings}/>}/>                
                     {/* Prescription */}
