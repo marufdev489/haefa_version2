@@ -227,14 +227,7 @@ const PatientReg = () => {
       //showErrorNotification("Error", "Registration Code or Number Format Invalid.");
     }
   };
-  
-  
-  
-  
-  
- 
-  
-  
+
   // const handleSubmit = async (event) => {
   //   event.preventDefault();
   //   try {

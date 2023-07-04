@@ -137,7 +137,9 @@ const GlucoseHemoglobin = () => {
           <div className="text-center mt-3 position-relative">
             <section>
               <div className="container">
-                <Button
+                {    
+                stations?.includes("station_4") ? (
+                  <Button
                   className="border-0 button-color text-white py-2 px-3 text-capitalize rounded	undefined btn btn-primary"
                   block="block"
                   type="button"
@@ -145,6 +147,17 @@ const GlucoseHemoglobin = () => {
                 >
                   Save
                 </Button>
+                ) : (
+                  <Button
+                  className="border-0 button-color text-white py-2 px-3 text-capitalize rounded	undefined btn btn-primary"
+                  block="block"
+                  type="button"
+                  onClick={(e) => handleSubmit(e,"/dashboard")}
+                >
+                  Save
+                  </Button>
+                )          
+                }
               </div>
             </section>
             <section className="stationBtn">

@@ -28,6 +28,13 @@ const StationCardiovascular = () => {
   const [hdlCholesterol, setHdlCholesterol] = useState("");
   const [cra, setCra] = useState("");
 
+  const token = localStorage.getItem('token');
+  const myTokenData = JSON.parse(token);
+  const barcodePrefix = myTokenData?.user?.barcode_format.barcode_prefix;
+  const randomNumber = Math.floor(100000 + Math.random() * 900000);
+  const prescriptionUniqueId = `${barcodePrefix}${randomNumber}`
+  console.log(prescriptionUniqueId); 
+
   useEffect(() => {
     let result;
     if (smoker == "Yes") {
@@ -111,7 +118,7 @@ const StationCardiovascular = () => {
       CRAType: "Lab",
       CreateUser: "Mihal",
       OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
-      PrescriptionId: "AABBCCDD15502",
+      PrescriptionId: prescriptionUniqueId,
       EmployeeId:"F53BFAE5-7678-4148-B47B-01721759FD99"
     };
     axios
@@ -322,7 +329,7 @@ const StationCardiovascular = () => {
                     Important: Inputs must be complete to perform calculation
                   </h6>
 
-                  {/* CRA (LAB) Result */}
+                  {/*  (LAB) Result */}
                   <div className="mb-3 position-relative">
                     <div className="iputComon">%</div>
                     <label htmlFor="" className="form-label text-capitalize">

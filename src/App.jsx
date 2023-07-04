@@ -34,7 +34,7 @@ const App = () => {
     const token = localStorage.getItem('token');
     const myTokenData = JSON.parse(token);
     const tokenData = myTokenData?.user?.station;
-    const stations = tokenData.split(",");
+    const stations = tokenData?.split(",");
     
     return (
         <>
@@ -55,9 +55,9 @@ const App = () => {
                     <Route exact path="/cardiovascular-risk-nonlab" element={<Protected Component={CardiovascularRiskLab}/>}/>
                     {/* station four */}
                     <Route exact path="/treatment-plan"  element={stations?.includes("patient_registration") && <Protected Component={TreatmentPlan}/>}/>
-                    <Route exact path="/user-data" element={stations?.includes("station_1") && <Protected Component={TPuserData}/>}/>
+                    <Route exact path="/user-data" element={ <Protected Component={TPuserData}/>}/>
                     <Route exact path="/station-fourb"  element={stations?.includes("station_2") && <Protected Component={PatientRegB}/>}/>
-                    <Route exact path="/four-c-userinput"   element={stations?.includes("station_3") && <Protected Component={FourAddInformation}/>}/>
+                    <Route exact path="/four-c-userinput"   element={ <Protected Component={FourAddInformation}/>}/>
                     <Route exact path="/patient-list"  element={stations?.includes("station_4") && <Protected Component={PatientDataList}/>}/>
                     <Route exact path="/counter" element={<Protected Component={Counter}/>}/>
                     <Route exact path="/settings" element={<Protected Component={Settings}/>}/>                

@@ -281,13 +281,21 @@ const StationOneHeight = () => {
           <div className="text-center mt-3 position-relative">
             <section>
               <div className="container">
-                <Button
-                  className="border-0 button-color text-white py-2 px-3 text-capitalize rounded	undefined"
-                  block="block"
-                  onClick={(e) => handleSubmit(e)}
-                >
-                  Save
-                </Button>
+                {
+                  stations?.includes("station_2") ? (<Button
+                    className="border-0 button-color text-white py-2 px-3 text-capitalize rounded	undefined"
+                    block="block"
+                    onClick={(e) => handleSubmit(e)}
+                  >
+                    Save
+                    </Button>) : (<Button
+                    className="border-0 button-color text-white py-2 px-3 text-capitalize rounded	undefined"
+                    block="block"
+                    onClick={(e) => handleSubmit(e, "/dashboard")}
+                  >
+                    Save
+                  </Button>)
+                }
               </div>
             </section>
             <section className="stationBtn">
