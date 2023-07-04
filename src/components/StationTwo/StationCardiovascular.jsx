@@ -31,9 +31,12 @@ const StationCardiovascular = () => {
   const token = localStorage.getItem('token');
   const myTokenData = JSON.parse(token);
   const barcodePrefix = myTokenData?.user?.barcode_format.barcode_prefix;
+  const name = myTokenData?.user?.name;
+  const myEmployeeId = myTokenData?.user?.employee?.EmployeeId;
   const randomNumber = Math.floor(100000 + Math.random() * 900000);
   const prescriptionUniqueId = `${barcodePrefix}${randomNumber}`
-  console.log(prescriptionUniqueId);
+  console.log(name);
+  console.log(myEmployeeId);
 
   useEffect(() => {
     let result;
@@ -157,10 +160,10 @@ const StationCardiovascular = () => {
       TotalCholesterol: totalCholesterol,
       HDLCholesterol: hdlCholesterol,
       CRAType: "Lab",
-      CreateUser: "Mihal",
+      CreateUser: name,
       OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       PrescriptionId: prescriptionUniqueId,
-      EmployeeId: "F53BFAE5-7678-4148-B47B-01721759FD99"
+      EmployeeId: myEmployeeId,
     };
     axios.post(`${API_URL}/api/cra-lab-create`, data)
       .then(() => {
