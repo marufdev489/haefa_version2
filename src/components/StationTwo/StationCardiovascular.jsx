@@ -35,9 +35,9 @@ const StationCardiovascular = () => {
   const myEmployeeId = myTokenData?.user?.employee?.EmployeeId;
   const randomNumber = Math.floor(100000 + Math.random() * 900000);
   const prescriptionUniqueId = `${barcodePrefix}${randomNumber}`
-  console.log(name);
-  console.log(myEmployeeId);
-
+  // console.log(name);
+  // console.log(myEmployeeId);
+ 
   useEffect(() => {
     let result;
     if (smoker == "Yes") {

@@ -10,8 +10,11 @@ import { API_URL } from "../../helper/Constants";
 import _ from "lodash";
 import { showSuccessNotification,showErrorNotification, } from "../../helper/notificationHelper";
 import {loggedInUserData} from "../../helper/localStorageHelper";
+
 const PatientReg = () => {
   const userData = loggedInUserData();
+  const userBarcode = userData.barcode_format.barcode_prefix
+  console.log(userBarcode);
   //genders
   const [genders, setDataGender] = useState([]);
   const getGenderCodeData = async () => {
@@ -99,10 +102,10 @@ const PatientReg = () => {
 
   const [formData, setFormData] = useState({
     patientInfo: {
-      RegistrationId: "",
+      RegistrationId: userBarcode,
       fName: "",
       lName: "",
-      patientAge: "",
+      patientAge: "",  
       DOB: "",
       contactNumber: "",
       GenderId: "",
