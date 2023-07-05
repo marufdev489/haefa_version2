@@ -57,7 +57,7 @@ const App = () => {
                     <Route exact path="/treatment-plan"  element={ <Protected Component={TreatmentPlan}/>}/>
                     <Route exact path="/user-data" element={ <Protected Component={TPuserData}/>}/>
                     <Route exact path="/station-fourb"  element={<Protected Component={PatientRegB}/>}/>
-                    <Route exact path="/four-c-userinput"   element={ <Protected Component={FourAddInformation}/>}/>
+                    <Route exact path="/four-c-userinput"  element={ <Protected Component={FourAddInformation}/>}/>
                     <Route exact path="/patient-list"  element={<Protected Component={PatientDataList}/>}/>
                     <Route exact path="/counter" element={<Protected Component={Counter}/>}/>
                     <Route exact path="/settings" element={<Protected Component={Settings}/>}/>                

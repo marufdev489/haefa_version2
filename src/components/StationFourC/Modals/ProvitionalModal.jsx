@@ -79,7 +79,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="px-3">
-        <div className="mb-3 pb-0 m-0 input-shadow rounded-pill">
+        <div className="mb-3 pb-0 m-0 input-shadow rounded-pill position-relative">
           <input
             type="text"
             value={provisionalDiagnosis}
@@ -92,6 +92,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
             {provisionalDiagnosisList.map((item, key) => {
               return (
                 <option
+                className="jiaurBD"
                   key={key}
                   value={
                     item.ProvisionalDiagnosisCode +

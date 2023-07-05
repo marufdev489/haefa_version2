@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import "../FourCuserInput.css";
 import axios from "axios";
 import { API_URL } from "../../../helper/Constants";
+import { loggedInUserData } from "../../../helper/localStorageHelper";
 import { useSelector } from "react-redux";
 
 function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
@@ -15,6 +16,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const [drugId, setDrugId] = useState("");
   const [instruction, setInstruction] = useState();
   const [durationId, setDurationId] = useState("");
+  const [drugDose, setDrugDose] = useState("");
 
   const [drugDurationValue, setDrugDurationValue] = useState("");
   const [showSuggestion, setShowSuggestion] = useState(false);
@@ -22,6 +24,9 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
 
   const [frequencyHour, setFrequencyHour] = useState("");
   const [frequencyValue, setFrequencyValue] = useState("");
+
+  const doctorName = loggedInUserData().name;
+  // console.log(doctorName); 
 
   useEffect(() => {
     let result;
@@ -90,11 +95,11 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
       refInstructionId: specialInstruction,
       drugDurationValue: drugDurationValue,
       otherDrug: "tab amaryl 1mg",
-      drugDose: "",
+      drugDose: drugDose,
       specialInstruction: "",
       comment: "test",
       Status: "A",
-      CreateUser: "nazmul",
+      CreateUser: doctorName,
       OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
     });
 
@@ -180,8 +185,8 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
         <div className="mb-3 input-shadow rounded-pill">
           <input
             type="text"
-            value={durationId}
-            onChange={(e) => setDurationId(e.target.value)}
+            value={drugDose}
+            onChange={(e) => setDrugDose(e.target.value)}
             className="form-control input-padding rounded-pill py-2 border-0"
             placeholder="Dos : 10mg, 20ml"
           />

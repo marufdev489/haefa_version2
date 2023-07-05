@@ -620,11 +620,11 @@ const SFourUserData = () => {
                 link="/four-c-userinput"
               />
               <div className="previewBtn">
-                <a
+                <Link to="/prescription"
                   className="border-0 button-color text-white py-2 px-3 text-capitalize rounded"
                 >
                   Histrory
-                </a>
+                </Link>
             </div>
             </div>
            

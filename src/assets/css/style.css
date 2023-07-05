@@ -481,4 +481,10 @@ div:where(.swal2-icon) {
 }
 
 
+.jiaurBD{
+  position: absolute;
+  top: 30px !important;
+  left: 0 !important;
+}
+
 
