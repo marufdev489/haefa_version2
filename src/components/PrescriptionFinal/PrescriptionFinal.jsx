@@ -225,7 +225,7 @@ const PrescriptionFinal = () => {
               {rxDetails.map((item, index) => (
                 <div className="medicine mb-4" key={index}>
                   <p className="mb-0">
-                    <b>{index + 1}</b>:&nbsp; {item.Description}
+                    <b>{index + 1}</b>:&nbsp; {item.DrugCode}({item.DrugDose})
                     <br></br>
                     {item.Frequency} &nbsp; {item.InstructionInBangla} &nbsp; -
                     &nbsp;
