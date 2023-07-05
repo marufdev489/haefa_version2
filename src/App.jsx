@@ -31,10 +31,10 @@ import Protected from './components/Protected';
 
 
 const App = () => {
-    const token = localStorage.getItem('token');
-    const myTokenData = JSON.parse(token);
-    const tokenData = myTokenData?.user?.station;
-    const stations = tokenData?.split(",");
+    // const token = localStorage.getItem('token');
+    // const myTokenData = JSON.parse(token);
+    // const tokenData = myTokenData?.user?.station;
+    // const stations = tokenData?.split(",");
     
     return (
         <>
@@ -54,7 +54,7 @@ const App = () => {
                     <Route exact path="/cardiovascular-risk-lab" element={<Protected Component={CardiovascularRisk}/>}/>
                     <Route exact path="/cardiovascular-risk-nonlab" element={<Protected Component={CardiovascularRiskLab}/>}/>
                     {/* station four */}
-                    <Route exact path="/treatment-plan"  element={stations?.includes("patient_registration") && <Protected Component={TreatmentPlan}/>}/>
+                    <Route exact path="/treatment-plan"  element={ <Protected Component={TreatmentPlan}/>}/>
                     <Route exact path="/user-data" element={ <Protected Component={TPuserData}/>}/>
                     <Route exact path="/station-fourb"  element={<Protected Component={PatientRegB}/>}/>
                     <Route exact path="/four-c-userinput"   element={ <Protected Component={FourAddInformation}/>}/>

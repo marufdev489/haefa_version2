@@ -50,7 +50,7 @@ const PrescriptionFinal = () => {
   const referrals = referral;
   const followUpDates = followUpDate;
 
-  //console.log(prescriptions);
+  // console.log(prescription);
 
   // Get the desired patient data
   // const patient = { patientId: "C52C9718-8B90-4B44-9267-000011CE53A6" };
@@ -61,6 +61,7 @@ const PrescriptionFinal = () => {
         patientId: patientId,
       })
       .then((response) => {
+        console.log(response); 
         setPatientInfo(response.data.PatientDetails);
         setPrescription(response.data.prescriptionCreation);
         setComplaints(response.data.Complaints);
