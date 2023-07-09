@@ -13,8 +13,12 @@ import Swal from "sweetalert2";
 import { API_URL } from "../../helper/Constants";
 import { useSelector } from "react-redux";
 import PatientShortInfo from "../Common/PatientShortInfo";
+import { loggedInUserData } from "../../helper/localStorageHelper";
 
 const SFourUserData = () => {
+  const logedinUserData = loggedInUserData();
+  const user = logedinUserData.name;
+
   const { patient } = useSelector((state) => state.patients);
 
   const [PatientId] = useState(patient?.PatientId);
@@ -85,7 +89,7 @@ const SFourUserData = () => {
       lmp: lmp,
       comment: comment,
       Status: 1,
-      CreateUser: "Mihal",
+      CreateUser: user,
       UpdateUser: "Mihal",
       OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
     },
@@ -93,7 +97,7 @@ const SFourUserData = () => {
       PatientId: PatientId,
       lmp: lmp,
       Status: 1,
-      CreateUser: "Mihal",
+      CreateUser: user,
       UpdateUser: "Mihal",
       OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
     },
@@ -104,7 +108,7 @@ const SFourUserData = () => {
       ccScreeningResultStatus: csResult,
       referralBiopsyStatus: isReferred,
       Status: 1,
-      CreateUser: "Mihal",
+      CreateUser: user,
       UpdateUser: "Mihal",
       OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
     },

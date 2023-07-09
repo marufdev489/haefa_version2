@@ -5,13 +5,16 @@ import axios from "axios";
 import { Button } from "react-bootstrap";
 import { API_URL } from "../../helper/Constants";
 import { useSelector } from "react-redux";
+import { loggedInUserData } from "../../helper/localStorageHelper";
 
 const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
-  const { patient } = useSelector((state) => state.patients);
+  const userData = loggedInUserData();
+  const userName = userData?.name;
+  // console.log(userName);
 
+  const { patient } = useSelector((state) => state.patients);
   const [PatientId] = useState(patient?.PatientId);
   const [OrgId] = useState(patient?.OrgId);
-
   const [chiefComplain, setChiefComplain] = useState("");
   const [durationId, setDurationId] = useState("");
   const [durationText, setDurationText] = useState("");
@@ -57,8 +60,8 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
       otherCC: otherCC,
       nature: nature,
       OrgId: OrgId,
-      CreateUser: "Mizanur Rahaman Sobuz",
-      UpdateUser: "Mizanur Rahaman Sobuz",
+      CreateUser: userName,
+      UpdateUser: "",
     });
 
     setFormData(myFormData);

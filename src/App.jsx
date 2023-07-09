@@ -28,10 +28,11 @@ import PatientDataList from './pages/PatientData';
 import Counter from './pages/Counter';
 import Settings from './pages/Setting';
 import Protected from './components/Protected';
-
+import { Navigate } from 'react-router-dom';
 
 const App = () => {
-    // const token = localStorage.getItem('token');
+
+    const token = localStorage.getItem('token');
     // const myTokenData = JSON.parse(token);
     // const tokenData = myTokenData?.user?.station;
     // const stations = tokenData?.split(",");
@@ -40,7 +41,7 @@ const App = () => {
         <>
             <BrowserRouter>    
                 <Routes>
-                    <Route exact path="/"  element={<Login/>}/>
+                    <Route exact path="/"  element={token ? <Navigate to="/dashboard"/> : <Login/>}/>
                     <Route exact path="/dashboard"  element={<Protected Component={DashboardPage}/>}/>
                     <Route exact path="/patient-registration" element={<Protected Component={Index}/>}/>
                     <Route exact path="/take-photo" element={<Protected Component={TakePhoto}/>}/>

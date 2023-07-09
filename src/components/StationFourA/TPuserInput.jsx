@@ -31,12 +31,15 @@ import { API_URL } from "../../helper/Constants";
 import { useSelector } from "react-redux";
 import PatientShortInfo from "../Common/PatientShortInfo";
 import { AiOutlineClose  } from 'react-icons/ai';
+import { loggedInUserData } from "../../helper/localStorageHelper";
 
 const TPuserData = () => {
+  const userData = loggedInUserData();
+  const userName = userData?.name;
+  // console.log(userName); 
+
   const { patient } = useSelector((state) => state.patients);
-
   const [PatientId] = useState(patient?.PatientId);
-
   const [formData, setFormData] = useState({
     Complaints: [],
     PatientHOPresentIllness: [],
@@ -45,8 +48,8 @@ const TPuserData = () => {
         PatientId: "C52C9718-8B90-4B44-9267-000011CE53A6",
         illnessId: "0EDBC57B-B8D8-409D-BFDB-0A4A81DD7EBB",
         otherIllness: "Test Past Other illness",
-        CreateUser: "Nazmul",
-        UpdateUser: "Nazmul1",
+        CreateUser: userName,
+        UpdateUser: "",
         OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       },
     ],
@@ -57,8 +60,8 @@ const TPuserData = () => {
         illnessId: "0EDBC57B-B8D8-409D-BFDB-0A4A81DD7EBB",
         otherIllness: "",
         Status: 1,
-        CreateUser: "Nazmul",
-        UpdateUser: "Nazmul1",
+        CreateUser: userName,
+        UpdateUser: "",
         OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       },
     ],
@@ -67,7 +70,7 @@ const TPuserData = () => {
         PatientId: "C52C9718-8B90-4B44-9267-000011CE53A6",
         socialBehaviorId: "C91982FF-851A-4701-BD45-6A6C490E440B",
         otherSocialBehavior: "Test SocialHistory",
-        CreateUser: "Nazmul",
+        CreateUser: userName,
         UpdateUser: "Nazmul1",
         OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       },
@@ -81,7 +84,7 @@ const TPuserData = () => {
         LGERF: 2,
         nightSweat: 4234,
         weightLoss: 543,
-        CreateUser: "Nazmul",
+        CreateUser: userName,
         UpdateUser: "Nazmul1",
         OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       },
@@ -103,7 +106,7 @@ const TPuserData = () => {
         otherSymptom: 0,
         cyanosis: null,
         Status: "A",
-        CreateUser: "Nazmul",
+        CreateUser: userName,
         UpdateUser: "Nazmul1",
         OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       },
@@ -117,7 +120,7 @@ const TPuserData = () => {
         answerId: "8D2A4E6E-1C00-445B-9FEB-0D272D429746",
         comment: "Test",
         Status: "A",
-        CreateUser: "Nazmul",
+        CreateUser: userName,
         UpdateUser: "Nazmul1",
         OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       },
@@ -128,7 +131,7 @@ const TPuserData = () => {
         vaccineId: "F20B756E-4480-4890-AD62-12C419418DC8",
         otherVaccine: "test",
         isGivenByNirog: "",
-        CreateUser: "Nazmul",
+        CreateUser: userName,
         UpdateUser: "Nazmul1",
         OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       },
@@ -139,7 +142,7 @@ const TPuserData = () => {
         vaccineId: "C008DE76-5D6C-4413-B4C2-F9B18867C7AE",
         otherVaccine: "",
         isGivenByNirog: "N",
-        CreateUser: "Nazmul",
+        CreateUser: userName,
         UpdateUser: "Nazmul1",
         OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       },

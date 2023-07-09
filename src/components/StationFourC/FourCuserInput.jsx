@@ -17,8 +17,13 @@ import { API_URL } from "../../helper/Constants";
 import { useSelector } from "react-redux";
 import PatientShortInfo from "../Common/PatientShortInfo";
 import { AiOutlineClose  } from 'react-icons/ai';
+import { loggedInUserData } from "../../helper/localStorageHelper";
 
 const FourCuserInput = () => {
+  const userData = loggedInUserData();
+  const user = userData.name;
+  // console.log(user);
+
   const { patient } = useSelector((state) => state.patients);
 
   const [PatientId] = useState(patient?.PatientId);
@@ -27,20 +32,20 @@ const FourCuserInput = () => {
     LabInvestigation: [],
     TreatmentSuggestion: [],
     Referral: [],
-    Advice: [],
+    Advice: [], 
     FollowUpDate: [
       {
           PatientId: PatientId,
           followUpDate: "",
           comment: "",
           Status: "",
-          CreateUser: "nazmul",
+          CreateUser: user,
           OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B"
       }
   ],
   });
 
-  // console.log(formData.TreatmentSuggestion);
+  // console.log(formData.FollowUpDate);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,6 +85,7 @@ const FourCuserInput = () => {
     e.preventDefault();
 
     let myFormData = { ...formData };
+    console.log(value);  
     myFormData.FollowUpDate[0][property] = value;
 
     setFormData(myFormData);

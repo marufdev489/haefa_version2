@@ -36,6 +36,26 @@ const PrescriptionFinal = () => {
   const [referral, setReferral] = useState([]);
   const [followUpDate, setFollowUpDate] = useState([]);
 
+  const updateDate = (followUpDate)=>{
+    console.log(followUpDate);
+    const updatedFollowUpDates = followUpDate.map(item => ({...item})); //copy to a new var
+    const extractedDates = followUpDate.map(({ FollowUpDate }) => FollowUpDate);
+    const originalDate = extractedDates;
+    const dateObj = new Date(originalDate);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+    const formattedDay = (day < 10 ? '0' : '') + day;
+    const formattedMonth = (month < 10 ? '0' : '') + month;
+    const formattedDate = `${formattedDay}-${formattedMonth}-${year}`;
+
+    updatedFollowUpDates.forEach(item => {
+      item.FollowUpDate = formattedDate; // Replace 'new date' with the desired updated value
+    });
+
+    return updatedFollowUpDates;
+  }
+
   // store data
   const patientInfos = patientInfo;
   const prescriptions = prescription;
@@ -49,8 +69,9 @@ const PrescriptionFinal = () => {
   const advices = advice;
   const referrals = referral;
   const followUpDates = followUpDate;
-
-  // console.log(prescription);
+  // const followUpDates = updateDate(followUpDate);
+  const updatedFollowUpDates = updateDate(followUpDates);
+  console.log(updatedFollowUpDates);
 
   // Get the desired patient data
   // const patient = { patientId: "C52C9718-8B90-4B44-9267-000011CE53A6" };
@@ -61,7 +82,7 @@ const PrescriptionFinal = () => {
         patientId: patientId,
       })
       .then((response) => {
-        console.log(response); 
+        // console.log(response); 
         setPatientInfo(response.data.PatientDetails);
         setPrescription(response.data.prescriptionCreation);
         setComplaints(response.data.Complaints);
@@ -80,7 +101,7 @@ const PrescriptionFinal = () => {
       });
   }, []); // empty dependency array to run the effect only once
 
-  return (
+  return ( 
     <>
       <section id="prescriptionFinal">
         <div className="container px-4">
@@ -252,12 +273,17 @@ const PrescriptionFinal = () => {
                     <b>Follow-up / পরবর্তী সাক্ষাৎ</b>
                   </p>
 
-                  {followUpDates.map((item, index) => (
+                  {updatedFollowUpDates.map((item, index) => (
                     <div key={index}>
-                      <p className="mb-0">
-                        <b>{index + 1}</b>:&nbsp;{item.FollowUpDate}:{" "}
-                        {item.Comment}
-                      </p>
+                        {
+                          item.FollowUpDate === "01-01-1900" ? (
+                            null
+                          ) : (
+                            <p className="mb-0">
+                             {item.FollowUpDate} : {" "} {item.Comment}
+                            </p>
+                          )
+                        }
                     </div>
                   ))}
                 </div>

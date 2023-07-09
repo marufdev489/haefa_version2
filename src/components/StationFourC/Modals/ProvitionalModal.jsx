@@ -16,6 +16,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
     useState("");
   const [diagnosisStatus, setDiagnosisStatus] = useState("");
   const [provisionalDiagnosisList, setprovisionalDiagnosisList] = useState([]);
+  const [showSuggestion, setShowSuggestion] = useState(false);
 
   useEffect(() => {
     axios
@@ -83,12 +84,35 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
           <input
             type="text"
             value={provisionalDiagnosis}
-            onChange={(e) => setProvisionalDiagnosis(e.target.value)}
+            onChange={(e) => {
+              setProvisionalDiagnosis(e.target.value);
+              setShowSuggestion(true);
+            }}
             className="form-control input-padding rounded-pill py-2 border-0"
             placeholder="Search (code/commen terms )"
             list="browsers"
           />
-          <datalist id="browsers">
+          <ul className="autocompleteDataList">
+          {provisionalDiagnosisList.map((item, key) => {
+              return (
+                <li
+                  key={key}
+                  onClick={() => {
+                    setShowSuggestion(false);
+                    //I had to check only code or name?
+                    setProvisionalDiagnosis(`${item.ProvisionalDiagnosisCode}${item.ProvisionalDiagnosisName}`);
+                  }}
+                >
+                  {
+                    item.ProvisionalDiagnosisCode +
+                      " " +
+                    item.ProvisionalDiagnosisName
+                  }
+                </li>
+              );
+            })}
+          </ul>
+          {/* <datalist id="browsers">
             {provisionalDiagnosisList.map((item, key) => {
               return (
                 <option
@@ -102,7 +126,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
                 />
               );
             })}
-          </datalist>
+          </datalist> */}
         </div>
 
         <div className="mb-3 pb-0 m-0 input-shadow rounded-pill">
