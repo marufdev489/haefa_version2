@@ -28,6 +28,7 @@ const GlucoseHemoglobin = () => {
   const handleSubmit = async (e, redirectUrl = "") => {
     e.preventDefault();
 
+    // console.log(`${RBG}  ${FBG} ${HrsFromLastEat} ${Hemoglobin},`);
     try {
       const response = await axios.post(
         `${API_URL}/api/patient-glucose-hemoglobin-create`,
@@ -38,9 +39,12 @@ const GlucoseHemoglobin = () => {
           HrsFromLastEat,
           Hemoglobin,
           OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
-          CreateUser: "Mizanur Rahaman sobuz",
+          CreateUser: "",
         }
       );
+
+      // console.log(response);
+
 
       Swal.fire({
         icon: "success",

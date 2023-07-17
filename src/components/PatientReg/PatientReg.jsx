@@ -14,7 +14,7 @@ import {loggedInUserData} from "../../helper/localStorageHelper";
 const PatientReg = () => {
   const userData = loggedInUserData();
   const userBarcode = userData.barcode_format.barcode_prefix
-  console.log(userBarcode);
+  // console.log(userBarcode);
   //genders
   const [genders, setDataGender] = useState([]);
   const getGenderCodeData = async () => {
@@ -204,17 +204,21 @@ const PatientReg = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await doValidation();
+      doValidation();
       const codeCheckResponse = await axios.post(
         `${API_URL}/api/registration-code-check`,
         { registrationCode: formData.patientInfo.RegistrationId }
       );
+
+      console.log(codeCheckResponse);
   
       if (codeCheckResponse.data) {
         const registrationResponse = await axios.post(
           `${API_URL}/api/patient-reg-create`,
           formData
         );
+
+        console.log(registrationResponse);
   
         if (registrationResponse.data) {
           showSuccessNotification("Success", registrationResponse.data.message);
@@ -226,8 +230,8 @@ const PatientReg = () => {
         showErrorNotification("Error", codeCheckResponse.data.message);
       }
     } catch (error) {
-      showErrorNotification(error?.response?.data?.message);
-      //showErrorNotification("Error", "Registration Code or Number Format Invalid.");
+      showErrorNotification("Error", "Please Fill In the Required Fields!");
+      // console.log(error.message);
     }
   };
 
@@ -319,7 +323,7 @@ const PatientReg = () => {
         <SectionBanner title="patient registration" />
 
         <div className="container">
-          <form onSubmit={(e) => handleSubmit(e)} className="mt-3">
+          <form onSubmit={handleSubmit} className="mt-3">
             <div className="row justify-content-center">
               <div className="col-lg-6">
                 <SectionTitle title="Registration" />
@@ -334,7 +338,7 @@ const PatientReg = () => {
                     value={formData.patientInfo.RegistrationId}
                     onChange={handleInputChange}
                     className={`form-control form-radious inputBox ${
-                      errors?.RegistrationId ? "invalid-field" : ""
+                      errors.RegistrationId ? "invalid-field" : ""
                     }`}
                     placeholder="Ex: 9087663320"
                   />

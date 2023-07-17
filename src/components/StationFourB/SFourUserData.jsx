@@ -396,7 +396,7 @@ const SFourUserData = () => {
                   </label>
                   <select
                     id="Select"
-                    className="form-select inputBox"
+                    className="form-select inputBox d1"
                     onChange={(event) => {
                       setContraceptionMethod(event.target.value);
                     }}
@@ -429,7 +429,7 @@ const SFourUserData = () => {
                   </label>
                   <select
                     id="Select"
-                    className="form-select inputBox"
+                    className="form-select inputBox d2"
                     value={menstruationProduct}
                     onChange={(event) => {
                       setMenstruationProduct(event.target.value);
@@ -450,7 +450,7 @@ const SFourUserData = () => {
                   </label>
                   <select
                     id="Select"
-                    className="form-select inputBox"
+                    className="form-select inputBox d3"
                     onChange={(event) => {
                       setProductReplace(event.target.value);
                     }}

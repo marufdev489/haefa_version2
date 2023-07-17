@@ -196,7 +196,7 @@ const PrescriptionFinal = () => {
                 ))}
               </div>
 
-              <div className="pres_item pt-3">
+              {/* <div className="pres_item pt-3">
                 <b className="d-block mb-0 py-2 border-bottom">
                   Provisional Dx
                 </b>
@@ -211,6 +211,25 @@ const PrescriptionFinal = () => {
                       {item.DiagnosisStatus == "P"
                         ? "[Presumptive]"
                         : item.DiagnosisStatus == "C"
+                        ? "[Confirmed]"
+                        : "[Unspecified]"}
+                    </p>
+                  </div>
+                ))}
+              </div> */}
+               <div className="pres_item pt-3">
+                <b className="d-block mb-0 py-2 border-bottom">
+                  Provisional Dx
+                </b>
+                {provisionalDXs.map((item, index) => (
+                  <div className="mb-0 mt-2 pe-2" key={index}>
+                    <b>Date: {item.CreateDate}</b>
+                    <p className="mb-0 mt-2 pe-2">
+                      {index + 1}: {item.ProvisionalDiagnosis}
+                      {""} [{item.OtherProvisionalDiagnosis}]{" "}
+                      {item.DiagnosisStatus == "N"
+                        ? "[Presumptive]"
+                        : item.DiagnosisStatus == "Y"
                         ? "[Confirmed]"
                         : "[Unspecified]"}
                     </p>

@@ -173,6 +173,7 @@ const FourCuserInput = () => {
                               <th>InvestigationId</th>
                               <th>OtherInvestigation</th>
                               <th>Instruction</th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
