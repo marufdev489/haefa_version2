@@ -246,9 +246,8 @@ const PrescriptionFinal = () => {
                     <b>Date: {item.CreateDate}</b>
                     <p className="mb-0 mt-2 pe-2">
                       {index + 1}:{" "}
-                      {item.Investigation != ""
-                        ? item.Investigation
-                        : item.OtherInvestigation}{" "}
+                      {item.Investigation }{""}
+                        [{item.OtherInvestigation}]{" "}
                       <br></br>
                       {/* {item.OtherInvestigation != ""
                       ? item.OtherInvestigation

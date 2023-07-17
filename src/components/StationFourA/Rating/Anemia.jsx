@@ -4,10 +4,6 @@ import "./Rating.css";
 const Anemia = ({ formData, setFormData }) => {
   const [value, setValue] = useState("");
 
-  const handleFieldsetClick = () => {
-    setValue(""); // Clear the selected radio button value
-  };
-
   useEffect(() => {
     if (value) {
       let myFormData = { ...formData };
@@ -19,17 +15,17 @@ const Anemia = ({ formData, setFormData }) => {
 
   return (
     <>
-      <fieldset className="rating" onDoubleClick={() => {handleFieldsetClick}}>
+      <fieldset className="rating">
         <input
           type="radio"
           id="star3"
           name="anemia"
           value="3"
           onChange={(e) => setValue(e.target.value)}
-          // onDoubleClick={(e) => {
-          //   e.target.checked = false;
-          //   e.target.value = null;
-          // }}
+          onDoubleClick={(e) => {
+            e.target.checked = false;
+            e.target.value = null;
+          }}
         />
         <label className="full" htmlFor="star3"></label>
 
@@ -39,10 +35,10 @@ const Anemia = ({ formData, setFormData }) => {
           name="anemia"
           value="2"
           onChange={(e) => setValue(e.target.value)}
-          // onDoubleClick={(e) => {
-          //   e.target.checked = false;
-          //   e.target.value = null;
-          // }}
+          onDoubleClick={(e) => {
+            e.target.checked = false;
+            e.target.value = null;
+          }}
         />
         <label className="full" htmlFor="star2"></label>
 
@@ -52,10 +48,10 @@ const Anemia = ({ formData, setFormData }) => {
           name="anemia"
           value="1"
           onChange={(e) => setValue(e.target.value)}
-          // onDoubleClick={(e) => {
-          //   e.target.checked = false;
-          //   e.target.value = null;
-          // }}
+          onDoubleClick={(e) => {
+            e.target.checked = false;
+            e.target.value = null;
+          }}
         />
         <label className="full" htmlFor="star1"></label>
       </fieldset>
