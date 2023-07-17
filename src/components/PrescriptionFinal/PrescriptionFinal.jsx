@@ -208,9 +208,9 @@ const PrescriptionFinal = () => {
                       {item.ProvisionalDiagnosis != ""
                         ? item.ProvisionalDiagnosis
                         : item.OtherProvisionalDiagnosis}{" "}
-                      {item.DiagnosisStatus == "P"
+                      {item.DiagnosisStatus == "N"
                         ? "[Presumptive]"
-                        : item.DiagnosisStatus == "C"
+                        : item.DiagnosisStatus == "Y"
                         ? "[Confirmed]"
                         : "[Unspecified]"}
                     </p>
