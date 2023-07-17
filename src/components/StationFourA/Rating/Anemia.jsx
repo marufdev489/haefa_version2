@@ -21,6 +21,7 @@ const Anemia = ({ formData, setFormData }) => {
           id="star3"
           name="anemia"
           value="3"
+          checked={value === "3"}
           onChange={(e) => setValue(e.target.value)}
           onDoubleClick={(e) => {
             e.target.checked = false;
@@ -34,6 +35,7 @@ const Anemia = ({ formData, setFormData }) => {
           id="star2"
           name="anemia"
           value="2"
+          checked={value === "2"}
           onChange={(e) => setValue(e.target.value)}
           onDoubleClick={(e) => {
             e.target.checked = false;
@@ -47,6 +49,7 @@ const Anemia = ({ formData, setFormData }) => {
           id="star1"
           name="anemia"
           value="1"
+          checked={value === "1"}
           onChange={(e) => setValue(e.target.value)}
           onDoubleClick={(e) => {
             e.target.checked = false;

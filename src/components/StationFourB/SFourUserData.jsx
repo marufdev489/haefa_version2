@@ -395,7 +395,7 @@ const SFourUserData = () => {
                     Contraception Method
                   </label>
                   <select
-                    id="Select"
+                    // id="Select"
                     className="form-select inputBox d1"
                     onChange={(event) => {
                       setContraceptionMethod(event.target.value);
@@ -428,7 +428,7 @@ const SFourUserData = () => {
                     What Product You Use During Menstruation?
                   </label>
                   <select
-                    id="Select"
+                    // id="Select"
                     className="form-select inputBox d2"
                     value={menstruationProduct}
                     onChange={(event) => {
@@ -449,7 +449,7 @@ const SFourUserData = () => {
                     How often do you change / replace?
                   </label>
                   <select
-                    id="Select"
+                    // id="Select"
                     className="form-select inputBox d3"
                     onChange={(event) => {
                       setProductReplace(event.target.value);
