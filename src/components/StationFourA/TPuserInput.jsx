@@ -32,13 +32,17 @@ import { useSelector } from "react-redux";
 import PatientShortInfo from "../Common/PatientShortInfo";
 import { AiOutlineClose  } from 'react-icons/ai';
 import { loggedInUserData } from "../../helper/localStorageHelper";
+import { Navigate } from "react-router-dom";
 
 const TPuserData = () => {
   const userData = loggedInUserData();
-  const userName = userData?.name;
-  // console.log(userName); 
+  const userName = userData?.name; 
+
+  const [patientGender, setPatientGender] = useState();
 
   const { patient } = useSelector((state) => state.patients);
+  // let patientGender = patient.gender.GenderCode;
+  // console.log(patientGender);
   const [PatientId] = useState(patient?.PatientId);
   const [formData, setFormData] = useState({
     Complaints: [],
@@ -163,7 +167,14 @@ const TPuserData = () => {
         title: "Success",
         text: response.data.message,
       }).then(function () {
-        window.location = "station-fourb";
+        if(patientGender === "Female"){
+          window.location = "station-fourb";
+          // <Navigate to="/station-fourb" />
+          console.log("I am in four-b block");
+        }else{
+          window.location = "four-c-userinput";
+          // <Navigate to="/four-c-userinput" />
+        }
       });
     } catch (error) {
       Swal.fire({
@@ -185,6 +196,7 @@ const TPuserData = () => {
 
   useEffect(() => {
     // console.log(formData.GeneralExamination[0]);
+    setPatientGender(patient.gender.GenderCode);
   }, [formData]);
 
   return (

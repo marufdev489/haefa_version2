@@ -116,7 +116,7 @@ const SFourUserData = () => {
 
   useEffect(() => {
     fetchData();
-  }, [data]);
+  }, []);
 
   // send form data
   const handleSubmit = (event) => {
