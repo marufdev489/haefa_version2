@@ -11,26 +11,28 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const [OrgId] = useState(patient?.OrgId);
   const [physicalFinding, setPhysicalFinding] = useState("");
   const [status, setStatus] = useState("");
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     let myFormData = { ...formData };
-
-    myFormData.SystemicExamination.push({
-      PatientId: PatientId,
-      physicalFinding: physicalFinding,
-      Status: status,
-      CreateUser: "Nazmul",
-      UpdateUser: "Nazmul1",
-      OrgId: OrgId,
-    });
-
-    setFormData(myFormData);
-
-    setPhysicalFinding("");
-    setStatus("");
-    onHide();
+    if(physicalFinding === ''){
+      setError(' This field can not be empty!');
+    } else{
+      myFormData.SystemicExamination.push({
+        PatientId: PatientId,
+        physicalFinding: physicalFinding,
+        Status: status,
+        CreateUser: "Nazmul",
+        UpdateUser: "Nazmul1",
+        OrgId: OrgId,
+      });
+      setFormData(myFormData);
+      setPhysicalFinding("");
+      setStatus("");
+      onHide();
+    }
   };
 
   return (
@@ -55,8 +57,9 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
             <select
               id="Select"
               value={physicalFinding}
-              onChange={(e) => setPhysicalFinding(e.target.value)}
-              className="form-select inputBox rounded-pill"
+              onChange={(e) => {setPhysicalFinding(e.target.value); setError('');}}
+              // className="form-select inputBox rounded-pill"
+              className={`form-select inputBox rounded-pill ${error ? 'error-input' : ''}`}
             >
               <option selected value="">
                 -- Select --
@@ -69,6 +72,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
               <option value="Abdominal">Abdominal</option>
               <option value="Musculoskeletal">Musculoskeletal</option>
             </select>
+            {error && <p style={{ color: 'red' }}>{error}</p>} 
           </div>
         </div>
         <div className="m-0 input-shadow rounded-pill">

@@ -21,6 +21,8 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const [referralList, setReferralList] = useState([]);
   const [healthCenterList, setHealthCenterList] = useState([]);
   const [showSuggestion, setShowSuggestion] = useState(false);
+  const [error1, setError1] = useState('');
+  const [error2, setError2] = useState('');
 
   useEffect(() => {
     axios
@@ -54,30 +56,39 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let myFormData = { ...formData };
+ 
+    if(rId === ''){
+      setError1('  This field can not be empty!');
+    }
+    if(healthCenterCode === ''){
+      setError2('  This field can not be empty!');
+    }
 
-    myFormData.Referral.push({
-      PatientId: PatientId,
-      rId: rId,
-      description,
-      healthCenterName,
-      healthCenterId: healthCenterId,
-      Status: status,
-      CreateUser: "nazmul",
-      OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
-    });
-
-    setFormData(myFormData);
-
-    setrId("");
-    setHealthCenterId("");
-    setStatus("");
-    setShowSuggestion("");
-    setHealthCenterName("");
-    setDescription("");
-    onHide();
+    if(rId && healthCenterCode){
+      myFormData.Referral.push({
+        PatientId: PatientId,
+        rId: rId,
+        description,
+        healthCenterName,
+        healthCenterId: healthCenterId,
+        Status: status,
+        CreateUser: "nazmul",
+        OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
+      });
+  
+      setFormData(myFormData);
+      setrId("");
+      setHealthCenterId("");
+      setStatus("");
+      setShowSuggestion("");
+      setHealthCenterName("");
+      setDescription("");
+      setHealthCenterCode("");
+      onHide();
+    }
   };
+
   return (
     <Modal
       show={show}
@@ -97,11 +108,13 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
         <div className="mb-3 input-shadow rounded-pill">
           <select
             id="Select"
-            className="form-select input-padding rounded-pill select-form-padding"
+            // className="form-select input-padding rounded-pill select-form-padding"
+            className={`form-select input-padding rounded-pill select-form-padding ${error1 ? 'error-input' : ''}`}
             value={rId}
             onChange={(e) => {
               let getDescription = e.target.selectedOptions[0].getAttribute("Description");
               setDescription(getDescription);
+              setError1("");
               setrId(e.target.value)}
             }
           >
@@ -118,6 +131,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
               );
             })}
           </select>
+            {error1 && <p style={{ color: 'red' }}>{error1}</p>} 
         </div>
 
         <div className="mb-3 pb-0 m-0 input-shadow rounded-pill">
@@ -127,8 +141,10 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
             onChange={(e) => {
               setHealthCenterCode(e.target.value);
               setShowSuggestion(true);
+              setError2("");
             }}
-            className="form-control input-padding rounded-pill py-2 border-0"
+            // className="form-control input-padding rounded-pill py-2 border-0"
+            className={`form-control input-padding rounded-pill py-2 border-0 ${error2 ? 'error-input' : ''}`}
             placeholder="Health Center"
           />
 
@@ -152,6 +168,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
               );
             })}
           </ul>
+          {error2 && <p style={{ color: 'red' }}>{error2}</p>} 
         </div>
 
         <div className="mb-3 pb-0 m-0 input-shadow rounded-pill">

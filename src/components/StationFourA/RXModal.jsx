@@ -17,6 +17,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const [status, setStatus] = useState("");
 
   const [medicineNameList, setMedicineNameList] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     axios
@@ -34,22 +35,26 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
 
     let myFormData = { ...formData };
 
-    myFormData.CurrentMedicationTaken.push({
-      PatientId: PatientId,
-      medicineName: medicineName,
-      durationId: "D796D547-1815-4EB7-A74D-03AB1342A625",
-      doseValue: doseValue,
-      Status: status,
-      CreateUser: "Nazmul",
-      UpdateUser: "Nazmul1",
-      OrgId: OrgId,
-    });
-
-    setFormData(myFormData);
-    setMedicineName("");
-    setDoseValue("");
-    setStatus("");
-    onHide();
+    if(medicineName === ''){
+      setError('This field can not be empty!');
+    }else{
+      myFormData.CurrentMedicationTaken.push({
+        PatientId: PatientId,
+        medicineName: medicineName,
+        durationId: "D796D547-1815-4EB7-A74D-03AB1342A625",
+        doseValue: doseValue,
+        Status: status,
+        CreateUser: "Nazmul",
+        UpdateUser: "Nazmul1",
+        OrgId: OrgId,
+      });
+  
+      setFormData(myFormData);
+      setMedicineName("");
+      setDoseValue("");
+      setStatus("");
+      onHide();
+    }
   };
   return (
     <Modal
@@ -72,11 +77,13 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
             <input
               type="text"
               value={medicineName}
-              onChange={(e) => setMedicineName(e.target.value)}
-              className="form-control input-padding rounded-pill py-2 border-0"
+              onChange={(e) => {setMedicineName(e.target.value); setError('');}}
+              // className="form-control input-padding rounded-pill py-2 border-0" 
+              className={`form-control input-padding rounded-pill py-2 border-0 ${error ? 'error-input' : ''}`}
               placeholder="Enter Medicine Name"
               list="browsers"
             />
+            {error && <p style={{ color: 'red' }}>{error}</p>} 
             <datalist id="browsers">
               {medicineNameList.map((item, key) => {
                 return <option key={key} value={item.DrugCode} />;

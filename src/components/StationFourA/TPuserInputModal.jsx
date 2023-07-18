@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 import { API_URL } from "../../helper/Constants";
 import { useSelector } from "react-redux";
 import { loggedInUserData } from "../../helper/localStorageHelper";
+import { showErrorNotification } from "../../helper/notificationHelper";
 
 const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
   const userData = loggedInUserData();
@@ -24,6 +25,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
 
   const [durationList, setDurationList] = useState([]);
   const [complainList, setComplainList] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     axios
@@ -50,29 +52,31 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
 
     let myFormData = { ...formData };
 
-    myFormData.Complaints.push({
-      PatientId: PatientId,
-      illnessId: "72649855-E62A-4662-A7C0-C730271ADEE1",
-      chiefComplain: chiefComplain,
-      durationId: durationId,
-      durationText: durationText,
-      ccDurationValue: ccDurationValue,
-      otherCC: otherCC,
-      nature: nature,
-      OrgId: OrgId,
-      CreateUser: userName,
-      UpdateUser: "",
-    });
-
-    setFormData(myFormData);
-
-    setChiefComplain("");
-    setDurationId("");
-    setDurationText("");
-    setCcDurationValue("");
-    setOtherCC("");
-    setNature("");
-    onHide();
+    if(chiefComplain === ''){
+      setError('This field can not be empty!');
+    }else{
+      myFormData.Complaints.push({
+        PatientId: PatientId,
+        illnessId: "72649855-E62A-4662-A7C0-C730271ADEE1",
+        chiefComplain: chiefComplain,
+        durationId: durationId,
+        durationText: durationText,
+        ccDurationValue: ccDurationValue,
+        otherCC: otherCC,
+        nature: nature,
+        OrgId: OrgId,
+        CreateUser: userName,
+        UpdateUser: "",
+      });
+      setFormData(myFormData);
+      setChiefComplain("");
+      setDurationId("");
+      setDurationText("");
+      setCcDurationValue("");
+      setOtherCC("");
+      setNature("");
+      onHide();
+    }
   };
 
   return (
@@ -87,7 +91,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
           id="contained-modal-title-vcenter"
           className="text-light font-18"
         >
-          Chief Complaints
+          Chief Complaints            
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="px-3 ">
@@ -95,11 +99,13 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
           <input
             type="text"
             value={chiefComplain}
-            onChange={(e) => setChiefComplain(e.target.value)}
-            className="form-control input-padding py-2 border-0"
+            onChange={(e) => {setChiefComplain(e.target.value); setError('');}}
+            // className="form-control input-padding py-2 border-0"
+            className={`form-control input-padding py-2 border-0 ${error ? 'error-input' : ''}`}
             placeholder="Enter Complaints"
             list="browsers"
           />
+          {error && <p style={{ color: 'red' }}>{error}</p>} 
           <datalist id="browsers">
             {complainList.map((item, key) => {
               return <option key={key} value={item.CCCode} />;

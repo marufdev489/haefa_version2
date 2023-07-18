@@ -87,7 +87,6 @@ const FourCuserInput = () => {
     let myFormData = { ...formData };
     console.log(value);  
     myFormData.FollowUpDate[0][property] = value;
-
     setFormData(myFormData);
   };
 
@@ -323,6 +322,7 @@ const FourCuserInput = () => {
                               <th>adviceId</th>
                               <th>advice</th>
                               <th>Status</th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -372,6 +372,7 @@ const FourCuserInput = () => {
                               <th>Description</th>
                               <th>Health Center Name</th>
                               <th>Status</th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>

@@ -87,9 +87,12 @@ textarea::placeholder {
   padding: 2px 3px;
 }
 /* Add remove data table end here */
-
-
-
+.error-input {
+  border-color: red !important;
+}
+.error-message {
+  color: red;
+}
 
 
 

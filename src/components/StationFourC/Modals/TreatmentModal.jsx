@@ -24,6 +24,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
 
   const [frequencyHour, setFrequencyHour] = useState("");
   const [frequencyValue, setFrequencyValue] = useState("");
+  const [error, setError] = useState('');
 
   const doctorName = loggedInUserData().name;
   // console.log(doctorName); 
@@ -84,35 +85,37 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
     e.preventDefault();
 
     let myFormData = { ...formData };
-
-    myFormData.TreatmentSuggestion.push({
-      PatientId: PatientId,
-      drugId: drugId,
-      instruction,
-      durationId: "D796D547-1815-4EB7-A74D-03AB1342A625",
-      frequencyId: "143927E4-67BC-41FD-B092-063033E34366",
-      frequency: frequencyValue,
-      refInstructionId: specialInstruction,
-      drugDurationValue: drugDurationValue,
-      otherDrug: "tab amaryl 1mg",
-      drugDose: drugDose,
-      specialInstruction: "",
-      comment: "test",
-      Status: "A",
-      CreateUser: doctorName,
-      OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
-    });
-
-    setFormData(myFormData);
-
-    setDrugId("");
-    setInstruction("");
-    setDrugCode("");
-    setDurationId("");
-    setFrequencyValue("");
-    setDrugDurationValue("");
-    onHide();
-    setShowSuggestion("");
+    if(drugCode === ''){
+      setError('  This field can not be empty!');
+    }else{
+      myFormData.TreatmentSuggestion.push({
+        PatientId: PatientId,
+        drugId: drugId,
+        instruction,
+        durationId: "D796D547-1815-4EB7-A74D-03AB1342A625",
+        frequencyId: "143927E4-67BC-41FD-B092-063033E34366",
+        frequency: frequencyValue,
+        refInstructionId: specialInstruction,
+        drugDurationValue: drugDurationValue,
+        otherDrug: "tab amaryl 1mg",
+        drugDose: drugDose,
+        specialInstruction: "",
+        comment: "test",
+        Status: "A",
+        CreateUser: doctorName,
+        OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
+      });
+  
+      setFormData(myFormData);
+      setDrugId("");
+      setInstruction("");
+      setDrugCode("");
+      setDurationId("");
+      setFrequencyValue("");
+      setDrugDurationValue("");
+      onHide();
+      setShowSuggestion("");
+    }
   };
 
   return (
@@ -138,11 +141,13 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
             onChange={(e) => {
               setDrugCode(e.target.value);
               setShowSuggestion(true);
+              setError('');
             }}
-            className="form-control input-padding rounded-pill py-2 border-0"
+            // className="form-control input-padding rounded-pill py-2 border-0"
+            className={`form-control input-padding rounded-pill py-2 border-0 ${error ? 'error-input' : ''}`}
             placeholder="Drug"
           />
-
+          {error && <p style={{ color: 'red' }}>{error}</p>} 
           <ul className="autocompleteDataList">
             {showSuggestion &&
               drugCodeList.map((item, key) => {

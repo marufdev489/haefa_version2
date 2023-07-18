@@ -18,6 +18,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const [instruction, setInstruction] = useState("");
   const [refLabInvestigationCodeList, setRefLabInvestigationCodeList] = useState([]);
   const [investigaion, setInvestigation] = useState();
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (investigationCode) {
@@ -41,28 +42,31 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
     e.preventDefault();
 
     let myFormData = { ...formData };
-
-    myFormData.LabInvestigation.push({
-      PatientId: PatientId,
-      investigationId: investigationId,
-      investigaion,
-      otherInvestigation: otherInvestigation,
-      instruction: positiveNegativeStatus,
-      positiveNegativeStatus: positiveNegativeStatus,
-      Status: "A",
-      CreateUser: "Mizanur Rahaman",
-      OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
-    });
-
-    setFormData(myFormData);
-
-    setInvestigationId("");
-    setInvestigationCode("");
-    setOtherInvestigation("");
-    setPositiveNegativeStatus("");
-    setInstruction("");
-    setInvestigation("");
-    onHide();
+    if(investigationCode === ''){
+      setError('  This field can not be empty!');
+    }else{
+      myFormData.LabInvestigation.push({
+        PatientId: PatientId,
+        investigationId: investigationId,
+        investigaion,
+        otherInvestigation: otherInvestigation,
+        instruction: positiveNegativeStatus,
+        positiveNegativeStatus: positiveNegativeStatus,
+        Status: "A",
+        CreateUser: "Mizanur Rahaman",
+        OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
+      });
+  
+      setFormData(myFormData);
+  
+      setInvestigationId("");
+      setInvestigationCode("");
+      setOtherInvestigation("");
+      setPositiveNegativeStatus("");
+      setInstruction("");
+      setInvestigation("");
+      onHide();
+    }
   };
   return (
     <Modal
@@ -88,11 +92,13 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
               {
                 setInvestigationCode(e.target.value);
                 setShowSuggestion(true);
+                setError('');
               }}
-            className="form-control input-padding rounded-pill py-2 border-0"
+            // className="form-control input-padding rounded-pill py-2 border-0"
+            className={`form-control input-padding rounded-pill py-2 border-0 ${error ? 'error-input' : ''}`}
             placeholder="search"
           />
-
+          {error && <p style={{ color: 'red' }}>{error}</p>} 
           <ul className="autocompleteDataList">
             {showSuggestion && refLabInvestigationCodeList.map((item, key) => {
               return (

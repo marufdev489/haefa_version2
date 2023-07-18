@@ -400,7 +400,7 @@ const SFourUserData = () => {
                     onChange={(event) => {
                       setContraceptionMethod(event.target.value);
                     }}
-                  >
+                  > 
                     <option>-- Select --</option>
                     {getCntraceptions?.map((item, index) => (
                       <option key={index} value={item.ContraceptionMethodId}>

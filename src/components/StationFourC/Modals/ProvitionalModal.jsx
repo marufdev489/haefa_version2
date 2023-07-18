@@ -17,6 +17,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const [diagnosisStatus, setDiagnosisStatus] = useState("");
   const [provisionalDiagnosisList, setprovisionalDiagnosisList] = useState([]);
   const [showSuggestion, setShowSuggestion] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     axios
@@ -36,25 +37,29 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let myFormData = { ...formData };
-    myFormData.ProvisionalDiagnosis.push({
-      PatientId: PatientId,
-      RefProvisionalDiagnosisId: "40391CDF-F43C-4A23-9CF2-000061D61331",
-      category: "Loram Ipsam",
-      provisionalDiagnosis: provisionalDiagnosis,
-      otherProvisionalDiagnosis: otherProvisionalDiagnosis,
-      diagnosisStatus: diagnosisStatus,
-      Status: "A",
-      CreateUser: "Mizanur Rahaman Sobuz",
-      OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
-    });
 
-    setFormData(myFormData);
-    setProvisionalDiagnosis("");
-    setOtherProvisionalDiagnosis("");
-    setDiagnosisStatus("");
-    onHide();
+    if(provisionalDiagnosis === ''){
+      setError('This field can not be empty!');
+    }else{
+      myFormData.ProvisionalDiagnosis.push({
+        PatientId: PatientId,
+        RefProvisionalDiagnosisId: "40391CDF-F43C-4A23-9CF2-000061D61331",
+        category: "Loram Ipsam",
+        provisionalDiagnosis: provisionalDiagnosis,
+        otherProvisionalDiagnosis: otherProvisionalDiagnosis,
+        diagnosisStatus: diagnosisStatus,
+        Status: "A",
+        CreateUser: "Mizanur Rahaman Sobuz",
+        OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
+      });
+  
+      setFormData(myFormData);
+      setProvisionalDiagnosis("");
+      setOtherProvisionalDiagnosis("");
+      setDiagnosisStatus("");
+      onHide();
+    }
   };
 
   const handleInputChange = (event) => {
@@ -64,6 +69,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const handleDoubleClick = () => {
     setDiagnosisStatus("");
   };
+
   return (
     <Modal
       show={show}
@@ -87,13 +93,16 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
             onChange={(e) => {
               setProvisionalDiagnosis(e.target.value);
               setShowSuggestion(true);
+              setError('');
             }}
-            className="form-control input-padding rounded-pill py-2 border-0"
+            // className="form-control input-padding rounded-pill py-2 border-0"
+            className={`form-control input-padding rounded-pill py-2 border-0 ${error ? 'error-input' : ''}`}
             placeholder="Search (code/commen terms )"
             list="browsers"
           />
+          {error && <p style={{ color: 'red' }}>{error}</p>} 
           <ul className="autocompleteDataList">
-          {provisionalDiagnosisList.map((item, key) => {
+          {showSuggestion && provisionalDiagnosisList.map((item, key) => {
               return (
                 <li
                   key={key}
