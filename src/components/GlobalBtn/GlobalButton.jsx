@@ -13,8 +13,8 @@ import {loggedInUserData} from "../../helper/localStorageHelper";
 const GlobalButton = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("token");
     navigate("/");
+    localStorage.removeItem("token");
   };
   const userData = loggedInUserData();
 

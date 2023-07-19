@@ -37,10 +37,10 @@ const SFourUserData = () => {
   const [moralityFemale, setMoralityFemale] = useState([]);
   const [isPregnant, setIsPregnant] = useState([]);
   const [lmp, setLMP] = useState([]);
-  const [contraceptionMethod, setContraceptionMethod] = useState("");
+  const [contraceptionMethod, setContraceptionMethod] = useState("00000000-0000-0000-0000-000000000000");
   const [comment, setComment] = useState([]);
-  const [menstruationProduct, setMenstruationProduct] = useState("");
-  const [productReplace, setProductReplace] = useState("");
+  const [menstruationProduct, setMenstruationProduct] = useState("00000000-0000-0000-0000-000000000000");
+  const [productReplace, setProductReplace] = useState("00000000-0000-0000-0000-000000000000");
   const [isConsent, setIsConsent] = useState([]);
   const [csResult, setCsResult] = useState([]);
   const [isReferred, setIsReferred] = useState([]);

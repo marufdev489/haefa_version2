@@ -159,7 +159,8 @@ const PrescriptionFinal = () => {
                 <b className="d-block mb-0 py-2 border-bottom">Complaints</b>
                 {chiefComplaints.map((item, index) => (
                   <p className="mb-0 mt-2 pe-2" key={index}>
-                    {item.CreateDate}:{item.ChiefComplain} for{" "}
+                    {item.CreateDate}:{item.ChiefComplain} 
+                    [{item.OtherCC}] for{" "}
                     {item.CCDurationValue} {item.DurationInEnglish}
                   </p>
                 ))}

@@ -10,17 +10,17 @@ import SingleButton from "./../Buttons/SingleButton/SingleButton";
 
 const PatientDataOnlyView = () => {
   const [startDate, setStartDate] = useState(new Date());
+  // document.getElementById("Country").value = "Bangladesh";
 
   return (
     <>
       <section className="patient-registration">
         {/* banner  */}
-        <SectionBanner title="patient registration" />
-
+        <SectionBanner title="patient registration"/>
         {/* form */}
         <div className="container">
           <form action="" className="mt-3">
-            <div className="row justify-content-center">
+            <div className="row justify-content-center"> 
               <div className="col-lg-8">
                 <SectionTitle title="Registration" />
                 <div className="mb-3 shadowme">
@@ -390,6 +390,7 @@ const PatientDataOnlyView = () => {
                     <option>Kurigram</option>
                   </select>
                 </div>
+
                 <div className="mb-3">
                   <label htmlFor="" className="form-label text-capitalize">
                     Country

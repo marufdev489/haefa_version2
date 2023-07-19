@@ -136,7 +136,7 @@ const PatientReg = () => {
       PostCodeParmanent: "",
       District: "",
       DistrictParmanent: "",
-      Country: "",
+      Country: "Bangladesh",
       CountryParmanent: "",
       Camp: "",
       BlockNumber: "",
