@@ -196,6 +196,7 @@ const PatientReg = () => {
         resolve("Ok");
       } else {
         setErrors(myErrors);
+        // showErrorNotification("Error", "Please Fill In the Required Fields!");
         reject("Error");
       }
     });
@@ -204,34 +205,31 @@ const PatientReg = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      doValidation();
+      // doValidation();
       const codeCheckResponse = await axios.post(
         `${API_URL}/api/registration-code-check`,
         { registrationCode: formData.patientInfo.RegistrationId }
       );
-
-      console.log(codeCheckResponse);
-  
-      if (codeCheckResponse.data) {
-        const registrationResponse = await axios.post(
-          `${API_URL}/api/patient-reg-create`,
-          formData
-        );
-
-        console.log(registrationResponse);
-  
-        if (registrationResponse.data) {
-          showSuccessNotification("Success", registrationResponse.data.message);
-          window.location = `/take-photo?PatientId=${registrationResponse.data.patientDetails.PatientId}`;
-        } else {
-          showErrorNotification("Error", registrationResponse.data.message);
+      if (codeCheckResponse.data.code === 200) {
+        try{
+          doValidation();
+            const registrationResponse = await axios.post(
+              `${API_URL}/api/patient-reg-create`,
+              formData
+            );
+            // console.log(registrationResponse);
+          if (registrationResponse.data) {
+            showSuccessNotification("Success", registrationResponse.data.message);
+            window.location = `/take-photo?PatientId=${registrationResponse.data.patientDetails.PatientId}`;
+          } else {
+            showErrorNotification("Error", registrationResponse.data.message);
+          }
+        }catch(error){
+          showErrorNotification("Error", "Please Fill In the Required Fields!");
         }
-      } else {
-        showErrorNotification("Error", codeCheckResponse.data.message);
       }
     } catch (error) {
-      showErrorNotification("Error", "Please Fill In the Required Fields!");
-      // console.log(error.message);
+      showErrorNotification("Error", error.response.data.message);
     }
   };
 
