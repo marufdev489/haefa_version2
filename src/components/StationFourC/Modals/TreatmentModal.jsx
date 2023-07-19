@@ -24,7 +24,11 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
 
   const [frequencyHour, setFrequencyHour] = useState("");
   const [frequencyValue, setFrequencyValue] = useState("");
+  const [specialInstruction, setSpecialInstruction] = useState("");
+  const [specialInstructionList, setSpecialInstructionList] = useState([]);
+  const [banglaInstruction, setBanglaInstruction] = useState(""); 
   const [error, setError] = useState('');
+  const [error2, setError2] = useState('');
 
   const doctorName = loggedInUserData().name;
   // console.log(doctorName); 
@@ -67,9 +71,6 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
     }
   }, [drugCode]);
 
-  const [specialInstruction, setSpecialInstruction] = useState("");
-  const [specialInstructionList, setSpecialInstructionList] = useState([]);
-
   useEffect(() => {
     axios
       .get(`${API_URL}/api/special-instruction`, {})
@@ -87,19 +88,25 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
     let myFormData = { ...formData };
     if(drugCode === ''){
       setError('  This field can not be empty!');
-    }else{
+    }
+    if(banglaInstruction === ''){
+      setError2('  This field can not be empty!');
+    }
+    if(drugCode && banglaInstruction){
       myFormData.TreatmentSuggestion.push({
         PatientId: PatientId,
         drugId: drugId,
+        drugCode,
+        frequencyHour,
+        drugDose,
+        drugDurationValue,
+        banglaInstruction,
         instruction,
         durationId: "D796D547-1815-4EB7-A74D-03AB1342A625",
         frequencyId: "143927E4-67BC-41FD-B092-063033E34366",
         frequency: frequencyValue,
         refInstructionId: specialInstruction,
-        drugDurationValue: drugDurationValue,
         otherDrug: "tab amaryl 1mg",
-        drugDose: drugDose,
-        specialInstruction: "",
         comment: "test",
         Status: "A",
         CreateUser: doctorName,
@@ -109,12 +116,16 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
       setFormData(myFormData);
       setDrugId("");
       setInstruction("");
+      setDrugCodeList([]);
       setDrugCode("");
       setDurationId("");
       setFrequencyValue("");
       setDrugDurationValue("");
       onHide();
       setShowSuggestion("");
+      setDrugDose("");
+      setBanglaInstruction("");
+      setSpecialInstruction("");
     }
   };
 
@@ -150,7 +161,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
           {error && <p style={{ color: 'red' }}>{error}</p>} 
           <ul className="autocompleteDataList">
             {showSuggestion &&
-              drugCodeList.map((item, key) => {
+              drugCodeList?.map((item, key) => {
                 return (
                   <li
                     key={key}
@@ -196,24 +207,6 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
             placeholder="Dos : 10mg, 20ml"
           />
         </div>
-        {/* <div className="mb-3 input-shadow rounded-pill">
-          <select
-            id="Select"
-            value={durationId}
-            onChange={(e) => setDurationId(e.target.value)}
-            className="form-select input-padding rounded-pill select-form-padding"
-          >
-            <option selected value="" disabled>
-              Frequency Hours
-            </option>
-            <option value="0">0</option>
-            <option value="4">4</option>
-            <option value="6">6</option>
-            <option value="8">8</option>
-            <option value="12">12</option>
-            <option value="24">24</option>
-          </select>
-        </div> */}
 
         <div className="mb-3 input-shadow rounded-pill">
           <input
@@ -230,29 +223,26 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
           <select
             id="Select"
             value={specialInstruction}
-            onChange={(e) => setSpecialInstruction(e.target.value)}
-            className="form-control input-padding rounded-pill py-2 border-0"
+            onChange={(e) => {
+            setSpecialInstruction(e.target.value); 
+            setBanglaInstruction(e.target.options[e.target.selectedIndex].getAttribute("data-bangla-instruction"));
+            setError2('');
+          }}
+            // className="form-control input-padding rounded-pill py-2 border-0"
+            className={`form-control input-padding rounded-pill py-2 border-0 ${error2 ? 'error-input' : ''}`}
           >
             <option selected value="">
               -- Select --
             </option>
             {specialInstructionList.map((item) => (
-              <option key={item.RefInstructionId} value={item.RefInstructionId}>
+              <option key={item.RefInstructionId} value={item.RefInstructionId} data-bangla-instruction={item.InstructionInBangla} >
                 {item.InstructionInBangla}
               </option>
             ))}
           </select>
+          {error2 && <p style={{ color: 'red' }}>{error2}</p>}
         </div>
 
-        {/* <div className="mb-3 pb-0 m-0 input-shadow rounded-pill">
-          <input
-            type="text"
-            value={specialInstruction}
-            onChange={(e) => setSpecialInstruction(e.target.value)}
-            className="form-control input-padding rounded-pill py-2 border-0"
-            placeholder="Special instruction"
-          />
-        </div> */}
       </Modal.Body>
       <Modal.Footer className="d-flex justify-content-center border-0 pt-0">
         <Button

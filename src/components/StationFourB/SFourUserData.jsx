@@ -37,14 +37,18 @@ const SFourUserData = () => {
   const [moralityFemale, setMoralityFemale] = useState([]);
   const [isPregnant, setIsPregnant] = useState([]);
   const [lmp, setLMP] = useState([]);
-  const [contraceptionMethod, setContraceptionMethod] = useState("00000000-0000-0000-0000-000000000000");
   const [comment, setComment] = useState([]);
-  const [menstruationProduct, setMenstruationProduct] = useState("00000000-0000-0000-0000-000000000000");
-  const [productReplace, setProductReplace] = useState("00000000-0000-0000-0000-000000000000");
+  const [contraceptionMethod, setContraceptionMethod] = useState("");
+  const [menstruationProduct, setMenstruationProduct] = useState("");
+  const [productReplace, setProductReplace] = useState("");
   const [isConsent, setIsConsent] = useState([]);
   const [csResult, setCsResult] = useState([]);
   const [isReferred, setIsReferred] = useState([]);
   const [whereRefer, setWhereRefer] = useState([]);
+
+  const [error, setError] = useState('');
+  const [error2, setError2] = useState('');
+  const [error3, setError3] = useState('');
 
   // store api data
   const [getCntraceptions, setGetCntraceptions] = useState([]);
@@ -76,18 +80,18 @@ const SFourUserData = () => {
       menstruationProductId: menstruationProduct,
       menstruationProductUsageTimeId: productReplace,
       contraceptionMethodId: contraceptionMethod,
-      gravida: gravida,
-      para: para,
-      stillBirth: stillBirth,
-      miscarraigeOrAbortion: miscarriage,
-      mr: mr,
-      livingMale: liveMale,
-      livingFemale: liveFemale,
-      male: moralityMale,
-      female: moralityFemale,
-      isPregnant: isPregnant,
-      lmp: lmp,
-      comment: comment,
+      gravida: gravida != "" ? gravida : "",
+      para: para != "" ? para : "",
+      stillBirth: stillBirth != "" ? stillBirth : "",
+      miscarraigeOrAbortion: miscarriage != "" ? miscarriage : "",
+      mr: mr != "" ? mr : "",
+      livingMale: liveMale != "" ? liveMale : "",
+      livingFemale: liveFemale != "" ? liveFemale : "",
+      male: moralityMale != "" ? moralityMale : "",
+      female: moralityFemale != "" ? moralityFemale : "",
+      isPregnant: isPregnant != "" ? isPregnant : "",
+      lmp: lmp != "" ? lmp : "",
+      comment: comment != "" ? comment : "",
       Status: 1,
       CreateUser: user,
       UpdateUser: "Mihal",
@@ -121,26 +125,37 @@ const SFourUserData = () => {
   // send form data
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    axios
-      .post(`${API_URL}/api/patient-s4b-create`, data)
-      .then((response) => {
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: response.data.message,
-        }).then(function () {
-          window.location = "four-c-userinput";
+    
+    if(contraceptionMethod === ''){
+      setError('  This field can not be empty!');
+    }
+    if(menstruationProduct === ''){
+      setError2('  This field can not be empty!');
+    }
+    if(productReplace === ''){
+      setError3('  This field can not be empty!');
+    }
+    if(contraceptionMethod && menstruationProduct && productReplace){
+      axios
+        .post(`${API_URL}/api/patient-s4b-create`, data)
+        .then((response) => {
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: response.data.message,
+          }).then(function () {
+            window.location = "four-c-userinput";
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "An error occurred.",
+          });
         });
-      })
-      .catch((error) => {
-        console.error(error);
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "An error occurred.",
-        });
-      });
+    }
   };
 
   return (
@@ -396,9 +411,11 @@ const SFourUserData = () => {
                   </label>
                   <select
                     // id="Select"
-                    className="form-select inputBox d1"
+                    // className="form-select inputBox d1"
+                    className={`form-select inputBox d1 ${error ? 'error-input' : ''}`}
                     onChange={(event) => {
                       setContraceptionMethod(event.target.value);
+                      setError("");
                     }}
                   > 
                     <option>-- Select --</option>
@@ -408,6 +425,7 @@ const SFourUserData = () => {
                       </option>
                     ))}
                   </select>
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
                 </div>
                 <div className="mb-3">
                   <label for="comments" className="form-label text-capitalize">
@@ -429,10 +447,12 @@ const SFourUserData = () => {
                   </label>
                   <select
                     // id="Select"
-                    className="form-select inputBox d2"
+                    // className="form-select inputBox d2"
+                    className={`form-select inputBox d2 ${error2 ? 'error-input' : ''}`}
                     value={menstruationProduct}
                     onChange={(event) => {
                       setMenstruationProduct(event.target.value);
+                      setError2("");
                     }}
                   >
                     <option>-- Select --</option>
@@ -443,6 +463,7 @@ const SFourUserData = () => {
                       </option>
                     ))}
                   </select>
+                  {error2 && <p style={{ color: 'red' }}>{error2}</p>}
                 </div>
                 <div className="mb-3">
                   <label for="" className="form-label text-capitalize">
@@ -450,9 +471,11 @@ const SFourUserData = () => {
                   </label>
                   <select
                     // id="Select"
-                    className="form-select inputBox d3"
+                    // className="form-select inputBox d3"
+                    className={`form-select inputBox d3 ${error3 ? 'error-input' : ''}`}
                     onChange={(event) => {
                       setProductReplace(event.target.value);
+                      setError3("");
                     }}
                   >
                     <option>-- Select --</option>
@@ -465,6 +488,7 @@ const SFourUserData = () => {
                       </option>
                     ))}
                   </select>
+                  {error3 && <p style={{ color: 'red' }}>{error3}</p>}
                 </div>
               </div>
             </div>

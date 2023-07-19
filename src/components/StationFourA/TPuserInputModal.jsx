@@ -26,6 +26,8 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
   const [durationList, setDurationList] = useState([]);
   const [complainList, setComplainList] = useState([]);
   const [error, setError] = useState('');
+  const [error2, setError2] = useState('');
+  const [error3, setError3] = useState('');
 
   useEffect(() => {
     axios
@@ -54,7 +56,14 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
 
     if(chiefComplain === ''){
       setError('This field can not be empty!');
-    }else{
+    }
+    if(durationText === ''){
+      setError2('This field can not be empty!');
+    }
+    if(ccDurationValue === ''){
+      setError3('This field can not be empty!');
+    }
+    if(chiefComplain && durationText && ccDurationValue ){
       myFormData.Complaints.push({
         PatientId: PatientId,
         illnessId: "72649855-E62A-4662-A7C0-C730271ADEE1",
@@ -116,12 +125,14 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
         <div className="mb-3 input-shadow">
           <select
             id="Select"
-            className="form-select input-padding select-form-padding"
+            // className="form-select input-padding select-form-padding"
+            className={`form-select input-padding select-form-padding ${error2 ? 'error-input' : ''}`}
             onChange={(e) => {
               let OptionText =
                 e.target.selectedOptions[0].getAttribute("option-text");
 
               setDurationId(e.target.value);
+              setError2('');
               setDurationText(OptionText);
             }}
             value={durationId}
@@ -139,23 +150,26 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
               </option>
             ))}
           </select>
+            {error2 && <p style={{ color: 'red' }}>{error2}</p>}
         </div>
 
         <div className="mb-3 pb-0 m-0 input-shadow">
           <input
             type="text"
-            className="form-control input-padding py-2 border-0"
+            // className="form-control input-padding py-2 border-0"
+            className={`form-control input-padding py-2 border-0 ${error3 ? 'error-input' : ''}`}
             placeholder="Enter CcDuration Value"
-            onChange={(e) => setCcDurationValue(e.target.value)}
+            onChange={(e) => {setCcDurationValue(e.target.value); setError3('')}}
             value={ccDurationValue}
           />
+          {error3 && <p style={{ color: 'red' }}>{error3}</p>}
         </div>
         <div className="mb-3 pb-0 m-0 input-shadow">
           <input
             type="text"
             className="form-control input-padding py-2 border-0"
             placeholder="Enter Other CC"
-            onChange={(e) => setOtherCC(e.target.value)}
+            onChange={(e) => {setOtherCC(e.target.value)}}
             value={otherCC}
           />
         </div>

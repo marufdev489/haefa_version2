@@ -45,7 +45,7 @@ const FourCuserInput = () => {
   ],
   });
 
-  // console.log(formData.FollowUpDate);
+  console.log(formData.TreatmentSuggestion);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -222,15 +222,23 @@ const FourCuserInput = () => {
                           <thead>
                             <tr>
                               <th>Drug Name</th>
+                              <th>Frequency Hours</th>
+                              <th>Drug Dose</th>
+                              <th>Duration</th>
+                              <th>Instruction</th>
                               <th>Action</th>
                             </tr>
-                          </thead>
+                          </thead> 
                           <tbody>
                             {formData.TreatmentSuggestion &&
                               formData.TreatmentSuggestion.map((item, key) => {
                                 return (
                                   <tr key={key}>
-                                    <td>{item.instruction}</td>
+                                    <td>{item.drugCode}</td>
+                                    <td>{item.frequencyHour}</td>
+                                    <td>{item.drugDose}</td>
+                                    <td>{item.drugDurationValue}</td>
+                                    <td>{item.banglaInstruction}</td>
                                     <td>
                                       <button
                                       className="btn btn-danger btn-sm"

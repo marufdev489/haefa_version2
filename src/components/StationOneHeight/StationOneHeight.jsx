@@ -25,6 +25,7 @@ const StationOneHeight = () => {
   const [RefBloodGroupId, setRefBloodGroupId] = useState("");
   const [OrgId] = useState("73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B");
   const [CreateUser] = useState("mmr");
+  const [error, setError] = useState('');
 
   const token = localStorage.getItem('token');
   const myTokenData = JSON.parse(token);
@@ -33,51 +34,44 @@ const StationOneHeight = () => {
 
   const handleSubmit = async (e, redirectUrl) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post(
-        `${API_URL}/api/patient-height-width-create`,
-        {
-          PatientId,
-          Height,
-          Weight,
-          BMI,
-          BMIClass,
-          MUAC,
-          MUACClass,
-          RefBloodGroupId,
-          OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
-          CreateUser: "Mizanur Rahaman sobuz",
-        }
-      );
-
-      // Swal.fire({
-      //   icon: "success",
-      //   title: "Success",
-      //   text: response.data.message,
-      // }).then(function () {
-      //   window.location = "user-table";
-      // });
-
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: response.data.message,
-      }).then(function () {
-        if (redirectUrl) {
-          window.location.href = redirectUrl;
-        } else {
-          window.location.href = "/blood-pressure-table";
-        }
-      });
-
+      if(RefBloodGroupId === ""){  
+        setError('  This field can not be empty!');
+      }else{
+        const response = await axios.post(
+          `${API_URL}/api/patient-height-width-create`,
+          {
+            PatientId,
+            Height,
+            Weight,
+            BMI,
+            BMIClass,
+            MUAC,
+            MUACClass,
+            RefBloodGroupId,
+            OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
+            CreateUser: "Mizanur Rahaman sobuz",
+          }
+        );
+  
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: response.data.message,
+        }).then(function () {
+          if (redirectUrl) {
+            window.location.href = redirectUrl;
+          } else {
+            window.location.href = "/blood-pressure-table";
+          }
+        });
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Error",
         text: "An error occurred.",
       });
-
       console.error(error);
     }
   };
@@ -262,8 +256,10 @@ const StationOneHeight = () => {
                   value={RefBloodGroupId}
                   onChange={(event) => {
                     setRefBloodGroupId(event.target.value);
+                    setError('');
                   }}
-                  className="form-select inputBox"
+                  className={`form-select inputBox ${error ? 'error-input' : ''}`}
+                  // className="form-select inputBox"
                 >
                   <option>-- Select --</option>
                   {bloodgroup.map((item) => (
@@ -275,6 +271,7 @@ const StationOneHeight = () => {
                     </option>
                   ))}
                 </select>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
               </div>
             </div>
           </div>

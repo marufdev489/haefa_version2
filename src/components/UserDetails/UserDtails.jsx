@@ -99,21 +99,21 @@ const UserDtails = () => {
               <p className="text-capitalize font-16 m-0 mb-2">
                 <address className="mb-0">
                   <strong>Present Address: </strong>
-                  {`${patient?.address?.AddressLine1 + ", "} ${
-                    patient?.address?.AddressLine2 + ", "
-                  } ${patient?.address?.Village + ", "} ${
-                    patient?.address?.Thana + ", "
-                  } ${patient?.address?.PostCode + ", "} ${
-                    patient?.address?.District + ", "
+                  {`${patient?.address?.AddressLine1 + " "} ${
+                    patient?.address?.AddressLine2 + " "
+                  } ${patient?.address?.Village + " "} ${
+                    patient?.address?.Thana + " "
+                  } ${patient?.address?.PostCode + " "} ${
+                    patient?.address?.District + " "
                   } ${patient?.address?.Country}`}
                 </address>
 
                 <address className="mb-0">
                   <strong>FDMN Camp: </strong>
-                  {`${patient?.address?.Camp + ", "} ${
-                    patient?.address?.BlockNumber + ", "
-                  } ${patient?.address?.Majhi + ", "} ${
-                    patient?.address?.TentNumber + ", "
+                  {`${patient?.address?.Camp + " "} ${
+                    patient?.address?.BlockNumber + " "
+                  } ${patient?.address?.Majhi + " "} ${
+                    patient?.address?.TentNumber + " "
                   } ${patient?.address?.FCN}`}
                 </address>
               </p>
