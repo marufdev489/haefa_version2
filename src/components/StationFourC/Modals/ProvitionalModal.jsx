@@ -10,10 +10,8 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const { patient } = useSelector((state) => state.patients);
 
   const [PatientId] = useState(patient?.PatientId);
-
   const [provisionalDiagnosis, setProvisionalDiagnosis] = useState("");
-  const [otherProvisionalDiagnosis, setOtherProvisionalDiagnosis] =
-    useState("");
+  const [otherProvisionalDiagnosis, setOtherProvisionalDiagnosis] = useState("");
   const [diagnosisStatus, setDiagnosisStatus] = useState("");
   const [provisionalDiagnosisList, setprovisionalDiagnosisList] = useState([]);
   const [showSuggestion, setShowSuggestion] = useState(false);
@@ -24,7 +22,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
       .get(`${API_URL}/api/provisional-diagonisis`, {
         params: {
           keyword: provisionalDiagnosis,
-          limit: 5,
+          limit: 20,
         },
       })
       .then((response) => {
@@ -109,14 +107,10 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
                   onClick={() => {
                     setShowSuggestion(false);
                     //I had to check only code or name?
-                    setProvisionalDiagnosis(`${item.ProvisionalDiagnosisCode}${item.ProvisionalDiagnosisName}`);
+                    setProvisionalDiagnosis(`${item.ProvisionalDiagnosisName}`);
                   }}
                 >
-                  {
-                    item.ProvisionalDiagnosisCode +
-                      " " +
-                    item.ProvisionalDiagnosisName
-                  }
+                  {item.ProvisionalDiagnosisName}
                 </li>
               );
             })}

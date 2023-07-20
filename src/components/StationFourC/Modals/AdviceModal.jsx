@@ -98,7 +98,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
                   AdviceText={item.AdviceCode}
                   value={item.AdviceId}
                   >
-                    <span> {item.AdviceCode} </span>
+                   
                     <span> {item.AdviceInBangla} </span>
                   </option>
                 );

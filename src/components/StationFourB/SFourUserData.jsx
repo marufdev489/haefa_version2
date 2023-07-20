@@ -99,7 +99,7 @@ const SFourUserData = () => {
     },
     MenstrualHistory: {
       PatientId: PatientId,
-      lmp: lmp,
+      lmp: lmp != "" ? lmp : "",
       Status: 1,
       CreateUser: user,
       UpdateUser: "Mihal",
@@ -108,9 +108,9 @@ const SFourUserData = () => {
 
     CervicalCancerScreening: {
       PatientId: PatientId,
-      ccScreeningDiagnosis: isConsent,
-      ccScreeningResultStatus: csResult,
-      referralBiopsyStatus: isReferred,
+      ccScreeningDiagnosis: isConsent != "" ? isConsent : "",
+      ccScreeningResultStatus: csResult != "" ? csResult : "",
+      referralBiopsyStatus: isReferred != "" ? isReferred : "",
       Status: 1,
       CreateUser: user,
       UpdateUser: "Mihal",

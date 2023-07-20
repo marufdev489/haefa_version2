@@ -16,7 +16,7 @@ import { Button } from "react-bootstrap";
 import { API_URL } from "../../helper/Constants";
 import { useSelector } from "react-redux";
 import PatientShortInfo from "../Common/PatientShortInfo";
-import { AiOutlineClose  } from 'react-icons/ai';
+import { AiOutlineClose } from "react-icons/ai";
 import { loggedInUserData } from "../../helper/localStorageHelper";
 
 const FourCuserInput = () => {
@@ -32,17 +32,17 @@ const FourCuserInput = () => {
     LabInvestigation: [],
     TreatmentSuggestion: [],
     Referral: [],
-    Advice: [], 
+    Advice: [],
     FollowUpDate: [
       {
-          PatientId: PatientId,
-          followUpDate: "",
-          comment: "",
-          Status: "",
-          CreateUser: user,
-          OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B"
-      }
-  ],
+        PatientId: PatientId,
+        followUpDate: "",
+        comment: "",
+        Status: "",
+        CreateUser: user,
+        OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
+      },
+    ],
   });
 
   console.log(formData.TreatmentSuggestion);
@@ -85,7 +85,7 @@ const FourCuserInput = () => {
     e.preventDefault();
 
     let myFormData = { ...formData };
-    console.log(value);  
+    console.log(value);
     myFormData.FollowUpDate[0][property] = value;
     setFormData(myFormData);
   };
@@ -133,7 +133,7 @@ const FourCuserInput = () => {
                                     <td>{item.diagnosisStatus}</td>
                                     <td>
                                       <button
-                                      className="btn btn-danger btn-sm"
+                                        className="btn btn-danger btn-sm"
                                         onClick={(e) =>
                                           handleRemoveByKey(
                                             e,
@@ -142,7 +142,7 @@ const FourCuserInput = () => {
                                           )
                                         }
                                       >
-                                         <AiOutlineClose className="fs-5"/>
+                                        <AiOutlineClose className="fs-5" />
                                       </button>
                                     </td>
                                   </tr>
@@ -185,7 +185,7 @@ const FourCuserInput = () => {
                                     <td>{item.instruction}</td>
                                     <td>
                                       <button
-                                      className="btn btn-danger btn-sm"
+                                        className="btn btn-danger btn-sm"
                                         onClick={(e) =>
                                           handleRemoveByKey(
                                             e,
@@ -194,7 +194,7 @@ const FourCuserInput = () => {
                                           )
                                         }
                                       >
-                                        <AiOutlineClose className="fs-5"/>
+                                        <AiOutlineClose className="fs-5" />
                                       </button>
                                     </td>
                                   </tr>
@@ -228,20 +228,20 @@ const FourCuserInput = () => {
                               <th>Instruction</th>
                               <th>Action</th>
                             </tr>
-                          </thead> 
+                          </thead>
                           <tbody>
                             {formData.TreatmentSuggestion &&
                               formData.TreatmentSuggestion.map((item, key) => {
                                 return (
                                   <tr key={key}>
                                     <td>{item.drugCode}</td>
-                                    <td>{item.frequencyHour}</td>
+                                    <td>{item.frequency}</td>
                                     <td>{item.drugDose}</td>
                                     <td>{item.drugDurationValue}</td>
                                     <td>{item.banglaInstruction}</td>
                                     <td>
                                       <button
-                                      className="btn btn-danger btn-sm"
+                                        className="btn btn-danger btn-sm"
                                         onClick={(e) =>
                                           handleRemoveByKey(
                                             e,
@@ -250,7 +250,7 @@ const FourCuserInput = () => {
                                           )
                                         }
                                       >
-                                        <AiOutlineClose className="fs-5"/>
+                                        <AiOutlineClose className="fs-5" />
                                       </button>
                                     </td>
                                   </tr>
@@ -280,11 +280,15 @@ const FourCuserInput = () => {
                           type="date"
                           value={formData.FollowUpDate.followUpDate}
                           onChange={(e) =>
-                            handleFollowUpDate(e, "followUpDate", e.target.value)
+                            handleFollowUpDate(
+                              e,
+                              "followUpDate",
+                              e.target.value
+                            )
                           }
                           className="dateIcon form-control input-padding rounded-pill py-2 border-0"
                         />
-                        </div>
+                      </div>
                       <div className="mb-3 mt-3 input-shadow shadow rounded-pill">
                         <select
                           id="Select"
@@ -345,12 +349,12 @@ const FourCuserInput = () => {
 
                                     <td>
                                       <button
-                                      className="btn btn-danger btn-sm"
+                                        className="btn btn-danger btn-sm"
                                         onClick={(e) =>
                                           handleRemoveByKey(e, "Advice", key)
                                         }
                                       >
-                                        <AiOutlineClose className="fs-5"/>
+                                        <AiOutlineClose className="fs-5" />
                                       </button>
                                     </td>
                                   </tr>
@@ -394,12 +398,12 @@ const FourCuserInput = () => {
                                     <td>{item.Status}</td>
                                     <td>
                                       <button
-                                      className="btn btn-danger btn-sm"
+                                        className="btn btn-danger btn-sm"
                                         onClick={(e) =>
                                           handleRemoveByKey(e, "Referral", key)
                                         }
                                       >
-                                        <AiOutlineClose className="fs-5"/>
+                                        <AiOutlineClose className="fs-5" />
                                       </button>
                                     </td>
                                   </tr>
@@ -419,19 +423,25 @@ const FourCuserInput = () => {
             </div>
 
             <div className="text-center mt-3 position-relative">
-              <Button className="border-0 button-color text-white py-2 px-3 text-capitalize rounded	undefined" type="submit">Save & Next</Button>
+              <Button
+                className="border-0 button-color text-white py-2 px-3 text-capitalize rounded	undefined"
+                type="submit"
+              >
+                Save & Next
+              </Button>
               {/* <SingleButton
                 btnOne="save & Next"
                 link="/cardiovascular-risk-nonlab"
               /> */}
 
               <div className="previewBtn">
-              <Link to="/prescription"
+                <Link
+                  to="/prescription"
                   className="border-0 button-color text-white py-2 px-3 text-capitalize rounded"
                 >
                   Histrory
                 </Link>
-            </div>
+              </div>
             </div>
           </form>
         </div>
