@@ -13,8 +13,12 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const [OrgId] = useState(patient?.OrgId);
 
   const [medicineName, setMedicineName] = useState("");
+  const [dose, setDose] = useState("");
   const [doseValue, setDoseValue] = useState("");
   const [status, setStatus] = useState("");
+  const [frequencyHour, setFrequencyHour] = useState("");
+  const [frequencyValue, setFrequencyValue] = useState("");
+  const [allergyToMedication, setAllergyToMedication] = useState("");
 
   const [medicineNameList, setMedicineNameList] = useState([]);
   const [error, setError] = useState('');
@@ -30,6 +34,24 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
       });
   }, []);
 
+   useEffect(() => {
+     let result;
+     if (frequencyHour == 4) {
+       result = "1+1+1+1+1+1";
+     } else if (frequencyHour == 6) {
+       result = "1+1+1+1";
+     } else if (frequencyHour == 8) {
+       result = "1+1+1";
+     } else if (frequencyHour == 12) {
+       result = "1+0+1";
+     } else if (frequencyHour == 24) {
+       result = "0+0+1";
+     } else {
+       result = "N/A";
+     }
+     setFrequencyValue(result);
+   }, [frequencyHour]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -43,6 +65,9 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
         medicineName: medicineName,
         durationId: "D796D547-1815-4EB7-A74D-03AB1342A625",
         doseValue: doseValue,
+        dose: dose,
+        frequencyHour: frequencyValue,
+        allergyToMedication: allergyToMedication,
         Status: status,
         CreateUser: "Nazmul",
         UpdateUser: "Nazmul1",
@@ -52,9 +77,11 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
       setFormData(myFormData);
       setMedicineName("");
       setDoseValue("");
+      setDose("");
       setStatus("");
       onHide();
     }
+    console.log(myFormData);
   };
   return (
     <Modal
@@ -77,13 +104,18 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
             <input
               type="text"
               value={medicineName}
-              onChange={(e) => {setMedicineName(e.target.value); setError('');}}
-              // className="form-control input-padding rounded-pill py-2 border-0" 
-              className={`form-control input-padding rounded-pill py-2 border-0 ${error ? 'error-input' : ''}`}
+              onChange={(e) => {
+                setMedicineName(e.target.value);
+                setError("");
+              }}
+              // className="form-control input-padding rounded-pill py-2 border-0"
+              className={`form-control input-padding rounded-pill py-2 border-0 ${
+                error ? "error-input" : ""
+              }`}
               placeholder="Enter Medicine Name"
               list="browsers"
             />
-            {error && <p style={{ color: 'red' }}>{error}</p>} 
+            {error && <p style={{ color: "red" }}>{error}</p>}
             <datalist id="browsers">
               {medicineNameList.map((item, key) => {
                 return <option key={key} value={item.DrugCode} />;
@@ -97,18 +129,21 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
             className="form-check-input"
             type="checkbox"
             id="medicineSelect"
-            // value={allergyToMedication}
-            // onChange={(e) => setAllergyToMedication(e.target.value)}
+            value={allergyToMedication}
+            onChange={(e) => setAllergyToMedication(e.target.checked)}
           />
-          <label className="form-check-label" htmlFor="allergy" for="medicineSelect">
+          <label
+            className="form-check-label"
+            htmlFor="allergy"
+            for="medicineSelect"
+          >
             Allergy to medication
           </label>
         </div>
         <div className="mb-3 input-shadow rounded-pill">
           <select
             id="Select"
-            // onChange={(e) => setFrequencyHour(e.target.value)}
-            // value={frequencyHour}
+            onChange={(e) => setFrequencyHour(e.target.value)}
             className="form-select input-padding rounded-pill select-form-padding"
           >
             <option value="" selected>
@@ -125,8 +160,8 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
         <div className="mb-3 input-shadow rounded-pill">
           <input
             type="text"
-            // onChange={(e) => setDose(e.target.value)}
-            // value={dose}
+            onChange={(e) => setDose(e.target.value)}
+            value={dose}
             className="form-control input-padding rounded-pill py-2 border-0"
             placeholder="Dos : 10mg, 20ml"
           />

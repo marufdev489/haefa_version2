@@ -17,6 +17,7 @@ const Prescription = () => {
   const patientId = patient?.PatientId;
 
   const [prescriptionpreviewall, setPrescriptionpreviewalldata] = useState([]);
+  console.log(prescriptionpreviewall);
 
   useEffect(() => {
     prescriptionpreviewalldata();
@@ -59,42 +60,18 @@ const Prescription = () => {
             ))}
           </div>
           <div className="patienStatus mb-4">
-            <h3>Blood Pressure</h3>
-            {prescriptionpreviewall.BP?.map((item, index) => (
-              <div key={index}>
-                <p>Blood Pressure:</p>
-                <span>Create Date: {item.CreateDate}</span>
-                <span>Systolic: {item.BPSystolic1} mmHgd</span>
-                <span>Diastolic: {item.BPDiastolic1} mmHg</span>
-
-                <p className="mt-4 mb-1 fs-6">Repeat BP</p>
-                <span>Create Date: {item.CreateDate}</span>
-                <span>Systolic: {item.BPDiastolic1} mmHg</span>
-                <span>Diastolic: {item.BPDiastolic2} mmHg</span>
-                <span>Heart Rate: {item.HeartRate} bpm</span>
-                <span>Temperature: {item.CurrentTemparature} &#8457;</span>
-              </div>
-            ))}
-          </div>
-          <div className="patienStatus mb-4">
-            <h3>Glucose</h3>
-            {/* <div className="presImg text-center">
-                <img className="PrescriptionImg" src={Glucose} alt="img"/>
-            </div> */}
+            <h3>GlucoseHb</h3>
             {prescriptionpreviewall.GlucoseHb?.map((item, index) => (
               <div key={index}>
-                <span>When Did You Last Eat?: 2.0 hours</span>
-                <span>RBG: {item.RBG} mMol</span>
-                <span>FBG: {item.FBG} mMol</span>
-                <span>Hemoglobin: {item.Hemoglobin} g/dl</span>
-                <p>Random Blood Glucose: {item.RBG}</p>
-                <p>Fasting Blood Glucose: {item.FBG}</p>
-                <p>Hemoglobin: {item.Hemoglobin}</p>
-                <p>Hours From Last Eat: {item.HrsFromLastEat}</p>
-                <p>Create Date: {item.CreateDate}</p>
+                <span>Random Blood Glucose: {item.RBG}</span>
+                <span>Fasting Blood Glucose: {item.FBG}</span>
+                <span>Hemoglobin: {item.Hemoglobin}</span>
+                <span>Hours From Last Eat: {item.HrsFromLastEat}</span>
+                <span>Create Date: {item.CreateDate}</span>
               </div>
             ))}
           </div>
+
           {/* <div className="patienStatus mb-4">
             <h3>Hemoglobin</h3>
             <span>When Did You Last Eat?: 2.0 hours</span>
@@ -105,12 +82,12 @@ const Prescription = () => {
           <div className="patienStatus mb-4">
             <h3>Physical (Chief) Complaints</h3>
             {prescriptionpreviewall.Complaints?.map((item, index) => (
-            <div key={index}>
-               <span>{item.CreateDate}: {item.ChiefComplain}</span>
-            
-            </div>
-          ))}
-           
+              <div key={index}>
+                <span>
+                  {item.CreateDate}: {item.ChiefComplain}
+                </span>
+              </div>
+            ))}
           </div>
           {/* <div className="patienStatus mb-4">
             <h3>General Examination</h3>
@@ -173,45 +150,70 @@ const Prescription = () => {
               </div>
             </div>
           </div> */}
-          <div className="patienStatus mb-4">
-            <h3>GlucoseHb</h3>
-            {prescriptionpreviewall.GlucoseHb?.map((item, index) => (
-            <div key={index}>
-              <span>Random Blood Glucose: {item.RBG}</span>
-              <span>Fasting Blood Glucose: {item.FBG}</span>
-              <span>Hemoglobin: {item.Hemoglobin}</span>
-              <span>Hours From Last Eat: {item.HrsFromLastEat}</span>
-              <span>Create Date: {item.CreateDate}</span>
-            </div>
-          ))}
 
-          </div>
-          <div className="patienStatus mb-4">
+          {/* <div className="patienStatus mb-4">
             <h3>General Findings</h3>
-               {prescriptionpreviewall.GeneralFindings?.map((item, index) => (
-            <div key={index}>
-              <span>Anemia Severity: {item.AnemiaSeverity}</span>
-              <span>Jaundice Severity: {item.JaundiceSeverity}</span>
-              <span>Edema Severity: {item.EdemaSeverity}</span>
-              <span>Lymph Nodes With Palpable: {item.LymphNodesWithPalpable}</span>
-              <span>
-                Lymph Nodes With Palpable Site:{" "}
-                {item.LymphNodesWithPalpableSite}
-              </span>
-              <span>
-                Lymph Nodes With Palpable Size:{" "}
-                {item.LymphNodesWithPalpableSize}
-              </span>
-              <span>Heart With NAD: {item.HeartWithNAD}</span>
-              <span>Lungs With NAD: {item.LungsWithNAD}</span>
-              <span>Other Symptom: {item.OtherSymptom}</span>
-              <span>Cyanosis: {item.Cyanosis}</span>
-              <span>Create Date: {item.CreateDate}</span>
-            </div>
-          ))}
-          </div>
+            {prescriptionpreviewall.GeneralFindings?.map((item, index) => (
+              <div key={index}>
+                <span>Anemia Severity: {item.AnemiaSeverity}</span>
+                <span>Jaundice Severity: {item.JaundiceSeverity}</span>
+                <span>Edema Severity: {item.EdemaSeverity}</span>
+                <span>
+                  Lymph Nodes With Palpable: {item.LymphNodesWithPalpable}
+                </span>
+                <span>
+                  Lymph Nodes With Palpable Site:{" "}
+                  {item.LymphNodesWithPalpableSite}
+                </span>
+                <span>
+                  Lymph Nodes With Palpable Size:{" "}
+                  {item.LymphNodesWithPalpableSize}
+                </span>
+                <span>Heart With NAD: {item.HeartWithNAD}</span>
+                <span>Lungs With NAD: {item.LungsWithNAD}</span>
+                <span>Other Symptom: {item.OtherSymptom}</span>
+                <span>Cyanosis: {item.Cyanosis}</span>
+                <span>Create Date: {item.CreateDate}</span>
+              </div>
+            ))}
+          </div> */}
 
           <div className="patienStatus mb-4">
+            <h3>Current Medication Taken</h3>
+            {prescriptionpreviewall.RxTaken?.map((item, index) => (
+              <div key={index}>
+                <span>Drug: {item.Rx}</span>
+                {item.AllergyToMedication == 1 ? (
+                  <span className="bg-danger text-decoration-none px-2">
+                    Allergic to medication
+                  </span>
+                ) : (
+                  ""
+                )}
+                <span>Frequency: {item.FrequencyHour}</span>
+                <span>
+                  <span>Dose: {item.Dose}</span>
+                  Duration: &nbsp;
+                  {item.RxDurationValue.includes("d") ||
+                  item.RxDurationValue.includes("D")
+                    ? item.RxDurationValue.replace(/d/i, " Day(s)")
+                    : item.RxDurationValue.includes("m") ||
+                      item.RxDurationValue.includes("M")
+                    ? item.RxDurationValue.replace(/m/i, " Month(s)")
+                    : item.RxDurationValue.includes("y") ||
+                      item.RxDurationValue.includes("Y")
+                    ? item.RxDurationValue.replace(/y/i, " Year(s)")
+                    : item.RxDurationValue.includes("c") ||
+                      item.RxDurationValue.includes("C")
+                    ? item.RxDurationValue.replace(/c/i, " Continious")
+                    : ""}
+                  
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* <div className="patienStatus mb-4">
             <h3>Current Medication Taken</h3>
             <span>Drug: Napa Extra</span>
             <span className="bg-danger text-decoration-none px-2">
@@ -220,7 +222,7 @@ const Prescription = () => {
             <span>Frequency Hours: 4</span>
             <span>Dos: 10mg</span>
             <span>Duration: 7 Days</span>
-          </div>
+          </div> */}
         </div>
 
         <div className="text-center mt-4">
@@ -230,7 +232,13 @@ const Prescription = () => {
             link="/four-c-userinput"
             link2="/final-prescription"
           /> */}
-        <button className="border-0 button-color text-white py-2 px-3 text-capitalize rounded me-3" onClick={() => navigate(-1)}> Back </button> 
+          <button
+            className="border-0 button-color text-white py-2 px-3 text-capitalize rounded me-3"
+            onClick={() => navigate(-1)}
+          >
+            {" "}
+            Back{" "}
+          </button>
         </div>
       </section>
       <GlobalButton />
