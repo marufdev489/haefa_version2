@@ -7,15 +7,16 @@ import { MdOutlineLogout } from "react-icons/md";
 import { Link } from "react-router-dom";
 import "./GlobalButton.css";
 import { Button } from "bootstrap";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {loggedInUserData} from "../../helper/localStorageHelper";
 
 const GlobalButton = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
     console.log("Hi I am in Logout function");
-    navigate("/");
+    // navigate("/");
+    window.location = "/";
   };
   const userData = loggedInUserData();
 
