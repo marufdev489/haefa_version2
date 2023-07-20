@@ -79,7 +79,7 @@ const Prescription = () => {
             <span>FBG: 0.0 mMol</span>
             <span>Hemoglobin: 11.0 g/dl</span>
           </div>  */}
-          <div className="patienStatus mb-4">
+          {/* <div className="patienStatus mb-4">
             <h3>Physical (Chief) Complaints</h3>
             {prescriptionpreviewall.Complaints?.map((item, index) => (
               <div key={index}>
@@ -88,7 +88,7 @@ const Prescription = () => {
                 </span>
               </div>
             ))}
-          </div>
+          </div> */}
           {/* <div className="patienStatus mb-4">
             <h3>General Examination</h3>
             <div className="d-flex">
