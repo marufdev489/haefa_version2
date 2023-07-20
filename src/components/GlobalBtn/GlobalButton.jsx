@@ -13,8 +13,9 @@ import {loggedInUserData} from "../../helper/localStorageHelper";
 const GlobalButton = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    navigate("/");
     localStorage.removeItem("token");
+    console.log("Hi I am in Logout function");
+    navigate("/");
   };
   const userData = loggedInUserData();
 

@@ -76,30 +76,33 @@ const PrescriptionFinal = () => {
   // Get the desired patient data
   // const patient = { patientId: "C52C9718-8B90-4B44-9267-000011CE53A6" };
 
+  const postPrescription = () =>{
+    axios.post(`${API_URL}/api/prescription`, {
+      patientId: patientId,
+    })
+    .then((response) => {
+      // console.log(response); 
+      setPatientInfo(response.data.PatientDetails);
+      setPrescription(response.data.prescriptionCreation);
+      setComplaints(response.data.Complaints);
+      setHeightWeight(response.data.HeightWeight);
+      setBp(response.data.BP);
+      setGlucoseHb(response.data.GlucoseHb);
+      setProvisionalDX(response.data.ProvisionalDx);
+      setLabInvestigation(response.data.Investigation);
+      setRxDetail(response.data.Treatment);
+      setAdvice(response.data.Advice);
+      setReferral(response.data.PatientReferral);
+      setFollowUpDate(response.data.FollowUpDate);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
   useEffect(() => {
-    axios
-      .post(`${API_URL}/api/prescription`, {
-        patientId: patientId,
-      })
-      .then((response) => {
-        // console.log(response); 
-        setPatientInfo(response.data.PatientDetails);
-        setPrescription(response.data.prescriptionCreation);
-        setComplaints(response.data.Complaints);
-        setHeightWeight(response.data.HeightWeight);
-        setBp(response.data.BP);
-        setGlucoseHb(response.data.GlucoseHb);
-        setProvisionalDX(response.data.ProvisionalDx);
-        setLabInvestigation(response.data.Investigation);
-        setRxDetail(response.data.Treatment);
-        setAdvice(response.data.Advice);
-        setReferral(response.data.PatientReferral);
-        setFollowUpDate(response.data.FollowUpDate);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []); // empty dependency array to run the effect only once
+    postPrescription();
+  }, []); 
 
   return ( 
     <>
