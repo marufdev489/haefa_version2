@@ -105,7 +105,7 @@ const PatientReg = () => {
       RegistrationId: userBarcode,
       fName: "",
       lName: "",
-      patientAge: "",  
+      patientAge: null,  
       DOB: "",
       contactNumber: "",
       GenderId: "",

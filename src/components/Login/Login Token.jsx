@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     setToken(storedToken);
-  }, []);
+  }, [token]);
   
   const handleSubmit = async (event) => {
     event.preventDefault();

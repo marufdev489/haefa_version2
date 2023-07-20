@@ -25,6 +25,8 @@ const FourCuserInput = () => {
   // console.log(user);
 
   const { patient } = useSelector((state) => state.patients);
+  const  { Age } = patient;
+  // console.log(Age); 
 
   const [PatientId] = useState(patient?.PatientId);
   const [formData, setFormData] = useState({
@@ -61,7 +63,12 @@ const FourCuserInput = () => {
         title: "Success",
         text: response.data.message,
       }).then(function () {
-        window.location = "cardiovascular-risk-nonlab";
+        if(Age === "" || Age >40){
+          window.location = "cardiovascular-risk-nonlab";
+          // window.location = "final-prescription";
+        }else{
+          window.location = "final-prescription";
+        }
       });
     } catch (error) {
       Swal.fire({

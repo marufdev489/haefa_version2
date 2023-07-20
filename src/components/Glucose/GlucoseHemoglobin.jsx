@@ -63,7 +63,6 @@ const GlucoseHemoglobin = () => {
         title: "Error",
         text: "An error occurred.",
       });
-
       console.error(error);
     }
   };
@@ -174,7 +173,6 @@ const GlucoseHemoglobin = () => {
                 Save &amp; Station 4
                 </a> 
               }
-
             </section>
             <div className="previewBtn">
                 <Link to="/prescription"
