@@ -719,7 +719,9 @@ const TPuserData = () => {
                           <thead>
                             <tr>
                               <th>Medicine Name</th>
-                              <th>Dose Value</th>
+                              <th>Duration</th>
+                              <th>Dose</th>
+                              <th>Frequency</th>
                               <th>Status</th>
                               <th>Action</th>
                             </tr>
@@ -732,10 +734,12 @@ const TPuserData = () => {
                                     <tr key={key}>
                                       <td>{item.medicineName}</td>
                                       <td>{item.doseValue}</td>
+                                      <td>{item.dose}</td>
+                                      <td>{item.frequencyHour}</td>
                                       <td>{item.Status}</td>
                                       <td>
                                         <button
-                                        className="btn btn-danger btn-sm"
+                                          className="btn btn-danger btn-sm"
                                           onClick={(e) =>
                                             handleRemoveByKey(
                                               e,
@@ -744,7 +748,7 @@ const TPuserData = () => {
                                             )
                                           }
                                         >
-                                          <AiOutlineClose className="fs-5"/>
+                                          <AiOutlineClose className="fs-5" />
                                         </button>
                                       </td>
                                     </tr>
