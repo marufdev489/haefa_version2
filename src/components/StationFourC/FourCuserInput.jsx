@@ -63,12 +63,7 @@ const FourCuserInput = () => {
         title: "Success",
         text: response.data.message,
       }).then(function () {
-        if(Age === "" || Age >40){
-          window.location = "cardiovascular-risk-nonlab";
-          // window.location = "final-prescription";
-        }else{
-          window.location = "final-prescription";
-        }
+        window.location = "cardiovascular-risk-nonlab";
       });
     } catch (error) {
       Swal.fire({
