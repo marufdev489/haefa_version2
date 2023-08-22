@@ -54,7 +54,6 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let myFormData = { ...formData };
 
     if(medicineName === ''){
