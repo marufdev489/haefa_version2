@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { loggedInUserData } from "../../helper/localStorageHelper";
 import { showErrorNotification } from "../../helper/notificationHelper";
 
+
+//main modal starts here..
 const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
   const userData = loggedInUserData();
   const userName = userData?.name;
@@ -22,7 +24,6 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
   const [ccDurationValue, setCcDurationValue] = useState("");
   const [otherCC, setOtherCC] = useState("");
   const [nature, setNature] = useState("");
-
   const [durationList, setDurationList] = useState([]);
   const [complainList, setComplainList] = useState([]);
   const [error, setError] = useState('');
@@ -47,6 +48,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
       .catch((error) => {
         console.error(error);
       });
+
   }, []);
 
   const handleSubmit = (e) => {
@@ -140,7 +142,7 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
             <option selected value="">
               -- Select --
             </option>
-            {durationList.map((duration) => (
+            {durationList?.map((duration) => (
               <option
                 value={duration.DurationId}
                 key={duration.DurationId}
@@ -208,7 +210,9 @@ const MyVerticallyCenteredModal = ({ show, onHide, formData, setFormData }) => {
     </Modal>
   );
 };
+//main modal ends here
 
+//component to call above modal component onClick
 const TPuserInputModal = (props) => {
   const [modalShow, setModalShow] = React.useState(false);
 

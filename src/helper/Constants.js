@@ -1,1 +1,1 @@
-export const API_URL = "http://192.168.68.145/haefa-all"
+export const API_URL = "http://192.168.10.40/haefa-all"

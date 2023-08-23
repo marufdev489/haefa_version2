@@ -39,6 +39,10 @@ const TPuserData = () => {
   const userName = userData?.name; 
 
   const [patientGender, setPatientGender] = useState();
+  const [tbScreeningCough, setTbScreeingCough] = useState(0);
+  const [tbScreeningLGERF, setTbScreeingLGERF] = useState(0);
+  const [tbScreeningnightSweat, setTbScreeingnightSweat] = useState(0);
+  const [tbScreeningweightLoss, setTbScreeingweightLoss] = useState(0);
 
   const { patient } = useSelector((state) => state.patients);
   // let patientGender = patient.gender.GenderCode;
@@ -84,10 +88,10 @@ const TPuserData = () => {
         PatientId: "C52C9718-8B90-4B44-9267-000011CE53A6",
         AnemiaSeverityId: null,
         AnemiaSeverity: 4323,
-        coughGreaterThanMonth: 5,
-        LGERF: 2,
-        nightSweat: 4234,
-        weightLoss: 543,
+        coughGreaterThanMonth: 0,
+        LGERF: 0,
+        nightSweat: 0,
+        weightLoss: 0,
         CreateUser: userName,
         UpdateUser: "Nazmul1",
         OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
@@ -152,6 +156,26 @@ const TPuserData = () => {
       },
     ],
   });
+
+  const handleChangeTbScreening = (e) => {
+    let myFormData = { ...formData };
+
+    myFormData.TBScreening[0] = {
+      PatientId: PatientId,
+      AnemiaSeverityId:null,
+      AnemiaSeverity: 4323,
+      coughGreaterThanMonth: tbScreeningCough,
+      LGERF: tbScreeningLGERF,
+      nightSweat: tbScreeningnightSweat,
+      weightLoss: tbScreeningweightLoss,
+      CreateUser:"Nazmul",
+      UpdateUser:"Nazmul1",
+      OrgId:"73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B"
+    };
+
+    setFormData(myFormData);
+    console.log(formData)
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -373,9 +397,10 @@ const TPuserData = () => {
                             <input
                               className="form-check-input"
                               type="radio"
-                              name="option1"
+                              name="coughGreaterThanMonth" 
                               id="no1"
-                              value=""
+                              value="0"
+                              onChange={(e)=>{setTbScreeingCough(e.target.value); handleChangeTbScreening(e)}}
                               onDoubleClick={(e) => {
                                 e.target.checked = false;
                                 e.target.value = null;
@@ -392,9 +417,10 @@ const TPuserData = () => {
                             <input
                               className="form-check-input"
                               type="radio"
-                              name="option1"
+                              name="coughGreaterThanMonth"
                               id="yes1"
-                              value=""
+                              value="1"
+                              onChange={(e)=>{setTbScreeingCough(e.target.value); handleChangeTbScreening(e)}}
                               onDoubleClick={(e) => {
                                 e.target.checked = false;
                                 e.target.value = null;
@@ -409,6 +435,7 @@ const TPuserData = () => {
                           </div>
                         </div>
                       </div>
+
                       <div className="d-flex justify-content-between">
                         <div className="">
                           <p className="font-16">LGERF ?</p>
@@ -418,9 +445,10 @@ const TPuserData = () => {
                             <input
                               className="form-check-input"
                               type="radio"
-                              name="option2"
+                              name="LGERF"
                               id="no2"
-                              value=""
+                              value="0"
+                              onChange={(e)=>{setTbScreeingLGERF(e.target.value); handleChangeTbScreening(e)}}
                               onDoubleClick={(e) => {
                                 e.target.checked = false;
                                 e.target.value = null;
@@ -437,9 +465,10 @@ const TPuserData = () => {
                             <input
                               className="form-check-input"
                               type="radio"
-                              name="option2"
+                              name="LGERF"
                               id="yes2"
-                              value=""
+                              value="1"
+                              onChange={(e)=>{setTbScreeingLGERF(e.target.value); handleChangeTbScreening(e)}}
                               onDoubleClick={(e) => {
                                 e.target.checked = false;
                                 e.target.value = null;
@@ -457,16 +486,17 @@ const TPuserData = () => {
 
                       <div className="d-flex justify-content-between">
                         <div className="">
-                          <p className="font-16">Night Sweat ?</p>
+                          <p className="font-16">Night Sweat?</p>
                         </div>
                         <div className="">
                           <div className="form-check form-check-inline">
                             <input
                               className="form-check-input"
                               type="radio"
-                              name="option3"
+                              name="nightSweat"
                               id="no3"
-                              value=""
+                              value="0"
+                              onChange={(e)=>{setTbScreeingnightSweat(e.target.value); handleChangeTbScreening(e)}}
                               onDoubleClick={(e) => {
                                 e.target.checked = false;
                                 e.target.value = null;
@@ -483,9 +513,10 @@ const TPuserData = () => {
                             <input
                               className="form-check-input"
                               type="radio"
-                              name="option3"
+                              name="nightSweat"
                               id="yes3"
-                              value=""
+                              value="1"
+                              onChange={(e)=>{setTbScreeingnightSweat(e.target.value); handleChangeTbScreening(e)}}
                               onDoubleClick={(e) => {
                                 e.target.checked = false;
                                 e.target.value = null;
@@ -509,9 +540,10 @@ const TPuserData = () => {
                             <input
                               className="form-check-input"
                               type="radio"
-                              name="option4"
+                              name="weightLoss"
                               id="no4"
-                              value=""
+                              value="0"
+                              onChange={(e)=>{setTbScreeingweightLoss(e.target.value); handleChangeTbScreening(e)}}
                             />
                             <label
                               className="form-check-label text-capitalize"
@@ -524,9 +556,10 @@ const TPuserData = () => {
                             <input
                               className="form-check-input"
                               type="radio"
-                              name="option4"
+                              name="weightLoss"
                               id="yes4"
-                              value=""
+                              value="1"
+                              onChange={(e)=>{setTbScreeingweightLoss(e.target.value); handleChangeTbScreening(e)}}
                             />
                             <label
                               className="form-check-label text-capitalize"
@@ -548,7 +581,8 @@ const TPuserData = () => {
                               type="radio"
                               name="option5"
                               id="no5"
-                              value=""
+                              value="0"
+                              onChange={(e)=>{setTbScreeingCough(e.target.value); handleChangeTbScreening(e)}}
                             />
                             <label
                               className="form-check-label text-capitalize"
@@ -563,7 +597,8 @@ const TPuserData = () => {
                               type="radio"
                               name="option5"
                               id="yes5"
-                              value=""
+                              value="1"
+                              onChange={(e)=>{setTbScreeingCough(e.target.value); handleChangeTbScreening(e)}}
                             />
                             <label
                               className="form-check-label text-capitalize"

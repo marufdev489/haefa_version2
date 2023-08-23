@@ -17,6 +17,7 @@ const PatientIllness = ({ formData, setFormData }) => {
 
   // PresentIllness
   const [PresentIllness, setPresentIllness] = useState([]);
+  
   const getPresentIllnessData = async () => {
     try {
       const response = await axios.get(
@@ -59,7 +60,6 @@ const PatientIllness = ({ formData, setFormData }) => {
           if (item.illnessId == illnessId) {
             item.Status = value;
           }
-
           return item;
         });
     }
@@ -128,6 +128,7 @@ const PatientIllness = ({ formData, setFormData }) => {
                     no
                   </label>
                 </div>
+
                 <div className="form-check form-check-inline">
                   <input
                     className="form-check-input"
