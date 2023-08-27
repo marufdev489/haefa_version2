@@ -259,6 +259,7 @@ const TPuserData = () => {
                             <tr>
                               <th>Chief Complain</th>
                               <th>Duration</th>
+                              <th>CC Duration Value</th>
                               <th>Other CC</th>
                               <th>Nature</th>
                               <th>Action</th>
@@ -270,7 +271,8 @@ const TPuserData = () => {
                                 return (
                                   <tr key={key}>
                                     <td>{item.chiefComplain}</td>
-                                  <td>{item.durationText}</td>
+                                    <td>{item.durationText}</td> 
+                                    <td>{item.ccDurationValue}</td>
                                     <td>{item.otherCC}</td>
                                     <td>{item.nature}</td>
                                     <td>

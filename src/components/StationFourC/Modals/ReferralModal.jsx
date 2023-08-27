@@ -163,7 +163,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
                     setShowSuggestion(false);
                   }}
                 >
-                  {item.HealthCenterCode}
+                  {item.HealthCenterCode}{", "}{item.HealthCenterName}
                 </li>
               );
             })}

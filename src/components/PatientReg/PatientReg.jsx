@@ -610,20 +610,6 @@ const PatientReg = () => {
                   />
                 </div>
 
-                {/* <div className="mb-3">
-                  <label htmlFor="" className="form-label text-capitalize">
-                    Union
-                  </label>
-                  <input
-                    type="text"
-                    name="addressInfo.Thana"
-                    value={formData.addressInfo.Thana}
-                    onChange={handleInputChange}
-                    className="form-control form-radious inputBox"
-                    placeholder="Type here"
-                  />
-                </div> */}
-
                 <div className="mb-3">
                   <label htmlFor="" className="form-label text-capitalize">
                   Union
@@ -685,6 +671,10 @@ const PatientReg = () => {
                     ))}
                   </select>
                 </div>
+
+                {/* Sub-district */}
+
+
                 <div className="mb-3">
                   <label htmlFor="" className="form-label text-capitalize">
                     Country

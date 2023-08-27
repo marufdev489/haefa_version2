@@ -17,7 +17,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const [status, setStatus] = useState("");
 
   const [adviceList, setAdviceList] = useState([]);
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
 
   useEffect(() => {
     axios
@@ -34,9 +34,6 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
     e.preventDefault();
 
     let myFormData = { ...formData };
-    if(adviceId === ''){
-      setError('  This field can not be empty!');
-    }else{
       myFormData.Advice.push({
         PatientId: PatientId,
         adviceId: adviceId,
@@ -48,12 +45,10 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
       });
   
       setFormData(myFormData);
-  
       setAdviceId("");
       setAdvice("");
       setStatus("");
       onHide();
-    }
   };
 
   return (
@@ -80,13 +75,12 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
               onChange={(e) => {
                 let getAdviceText =
                   e.target.selectedOptions[0].getAttribute("AdviceText");
-
                 setAdviceId(e.target.value);
                 setAdviceText(getAdviceText);
-                setError('');
+                // setError('');
               }}
               // className="form-select input-padding rounded-pill select-form-padding"
-              className={`form-select input-padding rounded-pill select-form-padding ${error ? 'error-input' : ''}`}
+              className={`form-select input-padding rounded-pill select-form-padding`}
             >
               <option selected value="">
                 Select Advice Code
@@ -104,7 +98,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
                 );
               })}
             </select>
-              {error && <p style={{ color: 'red' }}>{error}</p>} 
+              {/* {error && <p style={{ color: 'red' }}>{error}</p>}  */}
           </div>
 
           <div className="mb-3 input-shadow rounded-pill">
