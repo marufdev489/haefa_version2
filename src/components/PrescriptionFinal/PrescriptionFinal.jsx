@@ -37,7 +37,7 @@ const PrescriptionFinal = () => {
   const [followUpDate, setFollowUpDate] = useState([]);
 
   const updateDate = (followUpDate)=>{
-    console.log(followUpDate);
+    // console.log(followUpDate);
     const updatedFollowUpDates = followUpDate.map(item => ({...item})); //copy to a new var
     const extractedDates = followUpDate.map(({ FollowUpDate }) => FollowUpDate);
     const originalDate = extractedDates;
@@ -71,7 +71,7 @@ const PrescriptionFinal = () => {
   const followUpDates = followUpDate;
   // const followUpDates = updateDate(followUpDate);
   const updatedFollowUpDates = updateDate(followUpDates);
-  console.log(updatedFollowUpDates);
+  // console.log(updatedFollowUpDates);
 
   // Get the desired patient data
   // const patient = { patientId: "C52C9718-8B90-4B44-9267-000011CE53A6" };
@@ -81,7 +81,7 @@ const PrescriptionFinal = () => {
       patientId: patientId,
     })
     .then((response) => {
-      // console.log(response); 
+      console.log(response); 
       setPatientInfo(response.data.PatientDetails);
       setPrescription(response.data.prescriptionCreation);
       setComplaints(response.data.Complaints);
@@ -99,6 +99,8 @@ const PrescriptionFinal = () => {
       console.error(error);
     });
   }
+
+  // console.log(rxDetail);
 
   useEffect(() => {
     postPrescription();
@@ -142,7 +144,7 @@ const PrescriptionFinal = () => {
                 <b>Name :</b> {item.GivenName} {item.FamilyName}
               </span>
               <span className="me-3">
-                <b>Age :</b> {parseInt(item.Age)}
+                <b>Age :</b> {parseInt(item.Age)} year
               </span>
               <span className="me-3">
                 <b>Gender :</b> {item.gender.GenderCode}
@@ -181,7 +183,7 @@ const PrescriptionFinal = () => {
 
                 {bps.map((item, index) => (
                   <div className="mb-0 mt-2 pe-2" key={index}>
-                    <p className="mb-0 mt-2 pe-2">Pulse: {item.HeartRate}</p>
+                    <p className="mb-0 mt-2 pe-2">Pulse: {item.HeartRate} beat/min</p>
                     <p className="mb-0 mt-2 pe-2">
                       Blood Pressure: {item.BPSystolic1} / {item.BPDiastolic1}{" "}
                       mmHg
@@ -286,6 +288,7 @@ const PrescriptionFinal = () => {
                       ? item.DrugDurationValue.replace(/c/i, " চলবে")
                       : ""}
                   </p>
+                  <p>{}</p>
                 </div>
               ))}
 

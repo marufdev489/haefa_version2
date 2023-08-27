@@ -16,9 +16,15 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const [drugId, setDrugId] = useState("");
   const [instruction, setInstruction] = useState();
   const [durationId, setDurationId] = useState("");
-  const [drugDose, setDrugDose] = useState("");
+  const [drugSubstance, setDrugSubstance] = useState("");
+  const [drugSubstanceUnit, setDrugSubstanceUnit] = useState("");
 
-  const [drugDurationValue, setDrugDurationValue] = useState("");
+  const [drugPcs, setDrugPcs] = useState("");
+  const [drugPcsUnit, setDrugPcsUnit] = useState("");
+
+  const [drugDurationOnlyValue, setDrugDurationOnlyValue] = useState("");
+  const [drugDurationValueUnit, setDrugDurationValueUnit] = useState("");
+
   const [showSuggestion, setShowSuggestion] = useState(false);
   const [drugCodeList, setDrugCodeList] = useState([]);
 
@@ -28,10 +34,13 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
   const [specialInstructionList, setSpecialInstructionList] = useState([]);
   const [banglaInstruction, setBanglaInstruction] = useState(""); 
   const [error, setError] = useState('');
-  const [error2, setError2] = useState('');
+  // const [error2, setError2] = useState('');
 
   const doctorName = loggedInUserData().name;
-  // console.log(doctorName); 
+
+  let drugDose = drugSubstance+drugSubstanceUnit; //ex:10mg
+  let drugPieces = drugPcs + " " + drugPcsUnit; //1 spoon
+  let drugDurationValue = drugDurationOnlyValue + " " + drugDurationValueUnit; //20 day
 
   useEffect(() => {
     let result;
@@ -51,7 +60,6 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
     setFrequencyValue(result);
   }, [frequencyHour]);
 
-  // console.log(frequencyValue)
 
   useEffect(() => {
     if (drugCode) {
@@ -104,11 +112,11 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
         frequency: frequencyValue,
         refInstructionId: specialInstruction,
         drugDurationValue: drugDurationValue,
-        otherDrug: "tab amaryl 1mg",
+        otherDrug: "",
         drugDose: drugDose,
         specialInstruction: "",
-        comment: "test",
-        Status: "A",
+        comment: drugPieces, //drugPieces is set in comment field!
+        Status: "",
         CreateUser: doctorName,
         OrgId: "73CA453C-5F08-4BE7-A8B8-A2FDDA006A2B",
       });
@@ -120,10 +128,10 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
       setDrugCode("");
       setDurationId("");
       setFrequencyValue("");
-      setDrugDurationValue("");
+      setDrugDurationOnlyValue("");
       onHide();
       setShowSuggestion("");
-      setDrugDose("");
+      setDrugSubstance("");
       setBanglaInstruction("");
       setSpecialInstruction("");
     }
@@ -180,14 +188,39 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
           </ul>
         </div>
 
+        {/*updated div here */}
+        <div className="row mb-3 input-shadow rounded-pill">
+            <div className="col-lg-6">
+              <input
+                type="text"
+                value={drugSubstance}
+                onChange={(e) => setDrugSubstance(e.target.value)}
+                className="form-control input-padding rounded-pill py-2 border-0"
+                placeholder="Drug substance: 10, 20"
+              />
+            </div>
+
+            <div className="col-lg-6">
+            <select
+              id="Select" 
+              onChange={(e) =>  setDrugSubstanceUnit(e.target.value)}
+              className="form-select input-padding rounded-pill select-form-padding"
+            >
+              <option>Unit</option>
+              <option>mg</option>
+              <option>ml</option>
+              <option>g</option>
+            </select>
+            </div>
+        </div>
+
+
         <div className="mb-3 input-shadow rounded-pill">
           <select
             id="Select"
-            
             onChange={(e) =>  setFrequencyHour(e.target.value)}
             className="form-select input-padding rounded-pill select-form-padding"
           >
-        
             <option>Frequency Hours</option>
             <option>0</option>
             <option>4</option>
@@ -198,38 +231,71 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
           </select>
         </div>
 
-        <div className="mb-3 input-shadow rounded-pill">
-          <input
-            type="text"
-            value={drugDose}
-            onChange={(e) => setDrugDose(e.target.value)}
-            className="form-control input-padding rounded-pill py-2 border-0"
-            placeholder="Dos : 10mg, 20ml"
-          />
+        {/* Added a new div */}
+        <div className="row mb-3 input-shadow rounded-pill">
+            <div className="col-lg-6">
+              <select
+                id="Select"
+                onChange={(e) =>  setDrugPcs(e.target.value)}
+                className="form-select input-padding rounded-pill select-form-padding"
+              >
+                <option>Drug quantity</option>
+                <option>1/2</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div>
+
+            <div className="col-lg-6">
+              <select
+                id="Select"
+                onChange={(e) =>  setDrugPcsUnit(e.target.value)}
+                className="form-select input-padding rounded-pill select-form-padding"
+              >
+                <option>Unit</option>
+                <option>pcs</option>
+                <option>spoon</option>
+              </select>
+            </div>
         </div>
 
-        <div className="mb-3 input-shadow rounded-pill">
-          <input
-            type="text"
-            value={drugDurationValue}
-            onChange={(e) => setDrugDurationValue(e.target.value)}
-            className="form-control input-padding rounded-pill py-2 border-0"
-            placeholder="Duration : 2 D,M,Y"
-          />
+        <div className="row mb-3 input-shadow rounded-pill">
+            <div className="col-lg-6">
+              <input
+                type="text"
+                value={drugDurationOnlyValue}
+                onChange={(e) => setDrugDurationOnlyValue(e.target.value)}
+                className="form-control input-padding rounded-pill py-2 border-0"
+                placeholder="Duration : 1, 2..."
+              />
+            </div>
+            <div className="col-lg-6">
+              <select
+                id="Select"
+                onChange={(e) =>  setDrugDurationValueUnit(e.target.value)}
+                className="form-select input-padding rounded-pill select-form-padding"
+              >
+                <option>Unit</option>
+                <option>Day</option>
+                <option>Week</option>
+                <option>Month</option>
+                <option>Year</option>
+              </select>
+            </div>
         </div>
 
         <div className="mb-3">
-          <label htmlFor="" className="form-label text-capitalize"></label>
           <select
             id="Select"
             value={specialInstruction}
             onChange={(e) => {
             setSpecialInstruction(e.target.value); 
             setBanglaInstruction(e.target.options[e.target.selectedIndex].getAttribute("data-bangla-instruction"));
-            setError2('');
+            // setError2('');
           }}
             // className="form-control input-padding rounded-pill py-2 border-0"
-            className={`form-control input-padding rounded-pill py-2 border-0 ${error2 ? 'error-input' : ''}`}
+            className={`form-control input-padding rounded-pill py-2 border-0`}
           >
             <option selected value="">
               -- Select --
@@ -240,10 +306,11 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
               </option>
             ))}
           </select>
-          {error2 && <p style={{ color: 'red' }}>{error2}</p>}
+          {/* {error2 && <p style={{ color: 'red' }}>{error2}</p>} */}
         </div>
 
       </Modal.Body>
+
       <Modal.Footer className="d-flex justify-content-center border-0 pt-0">
         <Button
           onClick={(e) => handleSubmit(e)}

@@ -108,14 +108,22 @@ const UserDtails = () => {
                   } ${patient?.address?.Country}`}
                 </address>
 
-                <address className="mb-0">
-                  <strong>FDMN Camp: </strong>
-                  {`${patient?.address?.Camp + " "} ${
-                    patient?.address?.BlockNumber + " "
-                  } ${patient?.address?.Majhi + " "} ${
-                    patient?.address?.TentNumber + " "
-                  } ${patient?.address?.FCN}`}
-                </address>
+                {
+                  patient?.address?.Camp || patient?.address?.BlockNumber || 
+                    patient?.address?.Majhi || patient?.address?.TentNumber || patient?.address?.FCN 
+                    ? 
+                    <address className="mb-0">
+                    <strong>FDMN Camp: </strong>
+                    {`${patient?.address?.Camp + " "} ${
+                      patient?.address?.BlockNumber + " "
+                    } ${patient?.address?.Majhi + " "} ${
+                      patient?.address?.TentNumber + " "
+                    } ${patient?.address?.FCN}`}
+                   </address>
+                   :
+                   ""
+                }
+                
               </p>
             </div>
 

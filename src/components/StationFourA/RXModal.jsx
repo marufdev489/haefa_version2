@@ -33,7 +33,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
         console.error(error);
       });
   }, []);
-
+ 
    useEffect(() => {
      let result;
      if (frequencyHour == 4) {
@@ -60,7 +60,7 @@ function MyVerticallyCenteredModal({ show, onHide, formData, setFormData }) {
       setError('This field can not be empty!');
     }else{
       myFormData.CurrentMedicationTaken.push({
-        PatientId: PatientId,
+        PatientId: PatientId, 
         medicineName: medicineName,
         durationId: "D796D547-1815-4EB7-A74D-03AB1342A625",
         doseValue: doseValue,

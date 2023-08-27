@@ -236,11 +236,14 @@ const FourCuserInput = () => {
                               formData.TreatmentSuggestion.map((item, key) => {
                                 return (
                                   <tr key={key}>
-                                    <td>{item.drugCode}</td>
-                                    <td>{item.frequency}</td>
-                                    <td>{item.drugDose}</td>
-                                    <td>{item.drugDurationValue}</td>
-                                    <td>{item.banglaInstruction}</td>
+                                    <td>{item?.drugCode}</td>
+                                    <td>
+                                      <div>{item?.frequency}</div>
+                                      <div>{item?.comment}</div>
+                                    </td>
+                                    <td>{item?.drugDose}</td>
+                                    <td>{item?.drugDurationValue}</td>
+                                    <td>{item?.banglaInstruction}</td>
                                     <td>
                                       <button
                                         className="btn btn-danger btn-sm"
